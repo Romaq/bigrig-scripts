@@ -29,6 +29,8 @@ reconstruction is complete.
   * The system will need an "apt-get update && apt-get upgrade" command, of course.
   * A local "git" repository needs made for this documentation as well as the scripts
    for performing further setup to simplify fresh installations.
+  * gpg is already installed, I just need to add my private key and configure according
+   to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine).
 
 # Footnotes
 [^1]: ZFS is on the root. The design goal was that the hypervisor and all required parts
