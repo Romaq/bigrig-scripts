@@ -31,6 +31,9 @@ reconstruction is complete.
    for performing further setup to simplify fresh installations.
   * gpg is already installed, I just need to add my private key and configure according
    to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine).
+```
+mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git && cd bigrig-scripts
+```
 
 # Footnotes
 [^1]: ZFS is on the root. The design goal was that the hypervisor and all required parts
