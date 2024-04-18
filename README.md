@@ -34,7 +34,7 @@ reconstruction is complete.
   * Create the directory for this and other git "projects," clone the script site, and
    change to that directory.
 ```
-mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git && cd bigrig-scripts
+mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git
 cd ~/projects/bigrig-scripts
 ```
 
