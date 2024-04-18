@@ -31,9 +31,19 @@ reconstruction is complete.
    for performing further setup to simplify fresh installations.
   * gpg is already installed, I just need to add my private key and configure according
    to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine).
+  * Create the directory for this and other git "projects," clone the script site, and
+   change to that directory.
 ```
 mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git && cd bigrig-scripts
+cd ~/projects/bigrig-scripts
 ```
+
+4. Scripting for final setup
+   
+  * Run the scripts in support of having BigRig ready to begin adding VMs.
+  * First script, setup with Dynu.
+  * Next, ensure certificates from OpenSSL in place.
+  * Set up and confirm email alerts work through Gmail as a relay
 
 # Footnotes
 [^1]: ZFS is on the root. The design goal was that the hypervisor and all required parts
