@@ -38,8 +38,19 @@ mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-sc
 cd ~/projects/bigrig-scripts
 ```
 
-4. Scripting for final setup
-   
+4. Set domain name using Dynu (optional)
+
+  * run "sudo ./DynuSetup.sh"
+  * Answer the following questions for Dynu:
+    1. Dynamic DNS service provider: *other*
+    2. Dynamic DNS update protocol: *dyndns2*
+    3. Dynamic DNS server: *api.dynu.com*
+    4. Username: *<your-user-name>*
+    5. Password: *<your-password>*
+    6. Re-enter password: *<your-password>*
+    7. IP address discovery method: *Web-based IP discovery service*[^4]
+    8. Hosts to update: *<example.com, www.example.com>*  
+
   * Run the scripts in support of having BigRig ready to begin adding VMs.
   * First script, setup with Dynu.
   * Next, ensure certificates from OpenSSL in place.
@@ -53,3 +64,5 @@ a "dataset" can be leased to the VMs for speed critical components.
 page GUI control panel, but may also be a "PVE" command line.
 [^3]: The [PVE Firewall](https://pve.proxmox.com/wiki/Firewall#_configuration_files) has
 a hard-coded exceptions: "WebGUI(8006) and ssh(22) from your local network."
+[^4]: This selection avoids confusing your internal network interface from the external
+interface presented to the world.
