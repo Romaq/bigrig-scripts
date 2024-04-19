@@ -67,3 +67,5 @@ echo "  behalf so you won't have to. --Romaq"
 # 
 # Do a configuation test and verify this script has worked correctly.
 # echo "Sendmail relay through gmail test." | mail -s "Sendmail gmail Relay" $gmailaddress
+
+# EOF
