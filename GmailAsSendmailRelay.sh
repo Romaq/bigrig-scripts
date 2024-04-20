@@ -70,8 +70,3 @@ echo "  behalf so you won't have to. --Romaq"
 
 #
 # EOF
-
-=======
-
-# EOF
->>>>>>> refs/remotes/origin/main
