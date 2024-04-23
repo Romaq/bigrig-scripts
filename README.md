@@ -25,7 +25,7 @@ reconstruction is complete.
 3. Ongoing Maintenance  
   * Repositories need to be set for "no subscription" according to the relevant
    [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
-  * The system will need an "apt-get update && apt-get upgrade" command, of course.
+  * The system will need an `apt-get update && apt-get upgrade` command, of course.
   * A local "git" repository needs made for this documentation as well as the scripts
    for performing further setup to simplify fresh installations.
   * gpg is already installed, I just need to add my private key and configure according
@@ -38,7 +38,7 @@ cd ~/projects/bigrig-scripts
 ```
 
 4. Set domain name using https://www.dynu.com (optional if fixed IP)  
-  * Run "**sudo ./DynuSetup.sh**"
+  * Run `sudo ./DynuSetup.sh`
   * Answer the following questions for Dynu:
     1. Dynamic DNS service provider: *other*
     2. Dynamic DNS update protocol: *dyndns2*
