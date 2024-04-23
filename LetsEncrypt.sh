@@ -1,41 +1,35 @@
 #!/bin/bash
 
-# This script must be run as root
+# This script must NOT be run as root. Some parts are for userspace.
 #
-# Root access is required for updating aptitude packages
-#   as well as hard-coding system variables. If your plan
-#   is to use an email appliance, do not use this script.
-#   Rather, this is an exercise outside of the scope of
-#   the BigRig-Scripts project.
 
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 
+if (( $EUID == 0 )); then
+   echo "Do not run this script as root... you may be asked for"
+   echo "  your password to sudo into root later in the"
+   echo "  script, however."
    exit 1
 fi
 
 # Ensuring an update before progressing further.
-apt-get -qq update
+sudo apt-get -qq update
 
 # This script is based upon the following:
 #   https://gist.github.com/tavinus/15ea64c50ac5fb7cea918e7786c94a95
 
-# This will install a "projects" folder under root. As I
-#   learn scripting, I plan to run the script as user so
-#   ~user/projects will be valid at some point in the
-#   future. For now, if you wish to work with the acme.sh
-#   scripts in your ~user/projects folder, you will need
-#   to discover this on your own.
+# This will install a "projects" folder under as the current
+#   running user. In the author's case, user "asmith".
 
 # Per the guiding link given above...
 #   Let's create a work folder
 
-mkdir -p /root/projects && cd /root/projects
+mkdir -p ~/projects && cd ~/projects
 
 # Download acme.sh with git
-git clone 'https://github.com/Neilpang/scme.sh.git'
+git clone 'https://github.com/Neilpang/acme.sh.git'
 cd acme.sh
 
 read -p "What email will the Let's Encypt certificates be issued to?: " AccountEmail
+read -p "What tld domain will the certificate be issued to (example.com)?: " TopLevelDomain
 echo ""
 
 # Install with account
@@ -45,15 +39,42 @@ echo ""
 #   properly installed into crontab.
 
 # Go to the acme.sh installation folder
-cd /root/acme.sh
+cd ~/.acme.sh
 
 # Line by line, if it isn't there, ask for info then move on...
-if grep -Fq /root/.acme.sh/account.conf -e "ACCOUNT_EMAIL"
+if grep -Fq account.conf -e "ACCOUNT_EMAIL"
 then
+   echo ""
    echo "We have an account email present. Confirm it is correct"
-   echo "  by looking at /root/.acme.sh/account.conf"
+   echo "  by looking at ~/.acme.sh/account.conf"
 else
-   echo "ACCOUNT_EMAIL='$AccountEmail' >> /root/.acme.sh/account.conf
+   echo "ACCOUNT_EMAIL='$AccountEmail'" >> account.conf
 fi
+
+if grep -Fq account.conf -e "Dynu_ClientID"
+then
+   echo ""
+   echo "We have a Dynu Client Id present. Confirm it is correct"
+   echo "  by looking at ~/.acme.sh/account.conf"
+else
+   echo ""
+   read -p "Please enter the Client ID line from https://www.dynu.com/en-US/ControlPanel/APICredentials" Dynu_ClientId
+   echo "Dynu_ClientId='$Dynu_ClientId'" >> account.conf
+fi
+
+if grep -Fq account.conf -e "Dynu_Secret"
+then
+   echo ""
+   echo "We have a Dynu Secret present. Confirm it is correct"
+   echo "  by looking at ~/.acme.sh/account.conf"
+else
+   echo ""
+   read -p "Please enter the Secret line from https://www.dynu.com/en-US/ControlPanel/APICredentials" Dynu_Secret
+   echo "Dynu_Secret='$Dynu_Secret'" >> account.conf
+fi
+
+./acme.sh --debug --issue --dns dns_dynu -d $TopLevelDomain -d *.$TopLevelDomain
+
+./acme.sh --debug --installcert -d $HOSTNAME.$TopLevelDomain --keypath /etc/pve/local/pveproxy-ssl.key --fullchainpath /etc/pve/local/pveproxy-ssl.pem --reloadcmd "systemctl restart pveproxy"
 
 # EOF
