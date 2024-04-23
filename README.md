@@ -55,7 +55,8 @@ cd ~/projects/bigrig-scripts
 
   * Set up and confirm email alerts work through Gmail as a relay. The directions are fine
       as long asyou also set up postfix.
-  * 
+  * Prepare the zfs storage tank.
+  * Download .iso files to the storage tank.
 
 # Footnotes
 [^1]: ZFS is on the root. The design goal was that the hypervisor and all required parts
