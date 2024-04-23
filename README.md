@@ -49,7 +49,7 @@ cd ~/projects/bigrig-scripts
     7. IP address discovery method: *Web-based IP discovery service*[^4]
     8. Hosts to update: *< example.com, www.example.com >*
   * When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
-  * Confirm the update on the Proxmox host using "**sudo journalctl -u ddclient**"
+  * Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
 
 5. Set up OpenSSL certificates using https://letsencrypt.org
 
