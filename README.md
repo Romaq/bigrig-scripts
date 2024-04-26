@@ -19,7 +19,7 @@ reconstruction is complete.
 1. Complete the install of Proxmox 8.2 using default settings and obvious settings for
    the machine name and root password.
 
-3. SSH/ Console security first     
+2. SSH/ Console security first     
   * Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1][^2].  
     1. Bring the server up-to-date and install `sudo`, then place the user into the sudo group.
     ```
@@ -46,12 +46,16 @@ reconstruction is complete.
        * Save the changes, then invoke `systemctl restart sshd` to load the changes in.
        * Ensure you are not using a key agent to attempt to login as root with the password, user with the
          password, and *then* load the key to verify access via ssh can only be done using the proper key.
-         
-    
-  
-  * lock down the server with the firewall[^3].
+3. With reference to this [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/),
+   invoke the following:
+   ```
+   pveum user add <user>@pam
+   pveum user list
+   pveum acl modify / --roles PVEAdmin --users <user>@pam
+   ```
+4. Lock down the server with the firewall[^3].
 
-3. Ongoing Maintenance  
+5. Ogoing Maintenance  
   * Repositories need to be set for "no subscription" according to the relevant
    [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
   * The system will need an `apt-get update && apt-get upgrade` command, of course.
@@ -66,7 +70,7 @@ mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-sc
 cd ~/projects/bigrig-scripts
 ```
 
-4. Set domain name using https://www.dynu.com (optional if fixed IP)  
+6. Set domain name using https://www.dynu.com (optional if fixed IP)  
   * Run `sudo ./DynuSetup.sh`
   * Answer the following questions for Dynu:
     1. Dynamic DNS service provider: *other*
@@ -80,7 +84,7 @@ cd ~/projects/bigrig-scripts
   * When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
   * Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
 
-5. Set up email notifications per https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail/
+7. Set up email notifications per https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail/
 
   * Set up and confirm email alerts work through Gmail as a relay. The directions are fine
       as long asyou also set up postfix.
