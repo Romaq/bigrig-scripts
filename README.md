@@ -16,11 +16,12 @@ reconstruction is complete.
 
 # Milestones
 
-1. Complete the install of Proxmox, including ZFS at the root[^1].
+1. Complete the install of Proxmox 8.2 using default settings and obvious settings for
+   the machine name and root password.
 
 3. Security first     
-  * Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^2].  
-  * lock down the server with the firewall[^3].
+  * Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1].  
+  * lock down the server with the firewall[^2].
 
 3. Ongoing Maintenance  
   * Repositories need to be set for "no subscription" according to the relevant
@@ -46,7 +47,7 @@ cd ~/projects/bigrig-scripts
     4. Username: *<your-user-name>*
     5. Password: *<your-password>*
     6. Re-enter password: *<your-password>*
-    7. IP address discovery method: *Web-based IP discovery service*[^4]
+    7. IP address discovery method: *Web-based IP discovery service*[^3]
     8. Hosts to update: *< example.com, www.example.com >*
   * When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
   * Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
@@ -59,12 +60,9 @@ cd ~/projects/bigrig-scripts
   * Download .iso files to the storage tank.
 
 # Footnotes
-[^1]: ZFS is on the root. The design goal was that the hypervisor and all required parts
-would be separate from the SATA array in the event the USB controller failed. Under ZFS,
-a "dataset" can be leased to the VMs for speed critical components.
-[^2]: Proxmox Virtual Environment, usually but not necessarily the web
+[^1]: Proxmox Virtual Environment, usually but not necessarily the web
 page GUI control panel, but may also be a "PVE" command line.
-[^3]: The [PVE Firewall](https://pve.proxmox.com/wiki/Firewall#_configuration_files) has
+[^2]: The [PVE Firewall](https://pve.proxmox.com/wiki/Firewall#_configuration_files) has
 a hard-coded exceptions: "WebGUI(8006) and ssh(22) from your local network."
-[^4]: This selection avoids confusing your internal network interface from the external
+[^3]: This selection avoids confusing your internal network interface from the external
 interface presented to the world.
