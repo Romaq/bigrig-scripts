@@ -19,8 +19,36 @@ reconstruction is complete.
 1. Complete the install of Proxmox 8.2 using default settings and obvious settings for
    the machine name and root password.
 
-3. Security first     
+3. SSH/ Console security first     
   * Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1][^2].  
+    1. Bring the server up-to-date and install `sudo`, then place the user into the sudo group.
+    ```
+       apt update -y && apt upgrade -y
+       apt install sudo
+       usermod -aG sudo <user>
+    ```
+      Note: Ignore the warning messages, those are resovled later in these instructions.
+    
+    2. Become the user, create the .ssh directory with the correct permissions, and create
+    the `authorized_keys` file.    
+    ```
+       sudo -i -u <user>
+       mkdir -p .ssh
+       touch .ssh/authorized_keys
+       chmod -R go-rwx .ssh
+       vi .ssh/authorized_keys
+    ```
+    3. Place your public key into this file, save, and exit the user login. Verify this key works using SSH.
+    4. Either use `sudo -i` or login directly as root and lock down sshd editing the `/etc/ssh/sshd_config`
+       file for the following changes:
+       * Change `PermitRootLogin` to `no`.
+       * Change `PasswordAuthentication` to `no`.
+       * Save the changes, then invoke `systemctl restart sshd` to load the changes in.
+       * Ensure you are not using a key agent to attempt to login as root with the password, user with the
+         password, and *then* load the key to verify access via ssh can only be done using the proper key.
+         
+    
+  
   * lock down the server with the firewall[^3].
 
 3. Ongoing Maintenance  
