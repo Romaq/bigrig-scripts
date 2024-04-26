@@ -20,8 +20,8 @@ reconstruction is complete.
    the machine name and root password.
 
 3. Security first     
-  * Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1].  
-  * lock down the server with the firewall[^2].
+  * Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1][^2].  
+  * lock down the server with the firewall[^3].
 
 3. Ongoing Maintenance  
   * Repositories need to be set for "no subscription" according to the relevant
@@ -47,7 +47,7 @@ cd ~/projects/bigrig-scripts
     4. Username: *<your-user-name>*
     5. Password: *<your-password>*
     6. Re-enter password: *<your-password>*
-    7. IP address discovery method: *Web-based IP discovery service*[^3]
+    7. IP address discovery method: *Web-based IP discovery service*[^4]
     8. Hosts to update: *< example.com, www.example.com >*
   * When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
   * Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
@@ -62,7 +62,11 @@ cd ~/projects/bigrig-scripts
 # Footnotes
 [^1]: Proxmox Virtual Environment, usually but not necessarily the web
 page GUI control panel, but may also be a "PVE" command line.
-[^2]: The [PVE Firewall](https://pve.proxmox.com/wiki/Firewall#_configuration_files) has
+[^2]: A "sudo user" on both the shell and on PVE avoid exposing root privilages without a means
+to limit root privilage as conditions change. This also limits the need for exposing root
+in further stages of installation and development, such as with "git" identity on the
+server.
+[^3]: The [PVE Firewall](https://pve.proxmox.com/wiki/Firewall#_configuration_files) has
 a hard-coded exceptions: "WebGUI(8006) and ssh(22) from your local network."
-[^3]: This selection avoids confusing your internal network interface from the external
+[^4]: This selection avoids confusing your internal network interface from the external
 interface presented to the world.
