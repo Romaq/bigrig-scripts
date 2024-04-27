@@ -88,7 +88,7 @@ reconstruction is complete.
     6. Re-enter password: \<your-dynu-password\>  
     7. IP address discovery method: *Web-based IP discovery service*[^5]  
     8. Hosts to update: \< example.com, www.example.com \>  
-  3. When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
+  3. When the script completes, verify an update to [the Dynu Control Panel](https://www.dynu.com/en-US/ControlPanel/DDNS).
   4. Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
 
 7. Set up email notifications per the [howto](https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail).
