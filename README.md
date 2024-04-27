@@ -54,6 +54,8 @@ reconstruction is complete.
    pveum acl modify / --roles PVEAdmin --users <user>@pam
    ```
 4. Lock down the server with the firewall[^3].
+  * This is through the PVE Web, Datacenter:firewall/options, select "Firewall" on the right-side panel and
+    the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok."
 
 5. Ogoing Maintenance  
   * Repositories need to be set for "no subscription" according to the relevant
