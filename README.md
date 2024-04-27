@@ -20,7 +20,7 @@ reconstruction is complete.
    the machine name and root password.
 
 2. SSH/ Console security first     
-  * Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1][^2].  
+    Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1][^2].  
     1. Bring the server up-to-date and install `sudo`, then place the user into the sudo group.
     ```
        apt update -y && apt upgrade -y
@@ -54,18 +54,19 @@ reconstruction is complete.
    pveum acl modify / --roles PVEAdmin --users <user>@pam
    ```
 4. Lock down the server with the firewall[^3].
-  * This is through the PVE Web, Datacenter:firewall/options, select "Firewall" on the right-side panel and
-    the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok."
+   This is through the PVE Web, Datacenter:firewall/options, select "Firewall" on the right-side panel and
+   the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok."
 
 5. Ogoing Maintenance  
-  * Repositories need to be set for "no subscription" according to the relevant
+   1. Repositories need to be set for "no subscription" according to the relevant
    [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
-  * The system will need an `apt-get update && apt-get upgrade` command, of course.
-  * A local "git" repository needs made for this documentation as well as the scripts
+   Both GUI and CLI options are provided on the page.
+   3. The system will need an `apt-get update && apt-get upgrade` command, of course.
+   4. A local "git" repository needs made for this documentation as well as the scripts
    for performing further setup to simplify fresh installations.
-  * gpg is already installed, I just need to add my private key and configure according
+   5. gpg is already installed, I just need to add my private key and configure according
    to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine).
-  * Create the directory for this and other git "projects," clone the script site, and
+   6. Create the directory for this and other git "projects," clone the script site, and
    change to that directory.
 ```
 mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git
