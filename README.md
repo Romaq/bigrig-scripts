@@ -65,10 +65,10 @@ reconstruction is complete.
    3. Install git with `sudo apt install git -y`
    4. Check the [howto](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
       for information on setting up your git account on your server, if you need.
-   6. gpg is already installed, you must to add your private key and configure according
+   5. gpg is already installed, you must to add your private key and configure according
    to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine)
    on the \<adminuser\> account[^4].
-   7. A local \<adminuser\> "git" repository needs made for this documentation as well as the
+   6. A local \<adminuser\> "git" repository needs made for this documentation as well as the
       scripts for performing further setup to simplify fresh installations[^6]. Create the
       directory for this and other git "projects," clone the script site, and change to that
       directory.
@@ -77,19 +77,20 @@ reconstruction is complete.
       cd ~/projects/bigrig-scripts/bigrig-scripts
       ```
 
-6. Set domain name using https://www.dynu.com (optional if fixed IP)  
-  1. Run `sudo ./DynuSetup.sh`  
-    Answer the following questions for Dynu:  
-    1. Dynamic DNS service provider: *other*  
-    2. Dynamic DNS update protocol: *dyndns2*  
-    3. Dynamic DNS server: *api.dynu.com*  
-    4. Username: \<your-dynu-user-name\>  
-    5. Password: \<your-dynu-password\>  
-    6. Re-enter password: \<your-dynu-password\>  
-    7. IP address discovery method: *Web-based IP discovery service*[^5]  
-    8. Hosts to update: \< example.com, www.example.com \>  
-  3. When the script completes, verify an update to [the Dynu Control Panel](https://www.dynu.com/en-US/ControlPanel/DDNS).
-  4. Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
+6. Set domain name using https://www.dynu.com (optional if fixed IP)
+   
+    1. Run `sudo ./DynuSetup.sh`  
+       Answer the following questions for Dynu:  
+       1. Dynamic DNS service provider: *other*  
+       2. Dynamic DNS update protocol: *dyndns2*  
+       3. Dynamic DNS server: *api.dynu.com*  
+       4. Username: \<your-dynu-user-name\>  
+       5. Password: \<your-dynu-password\>  
+       6. Re-enter password: \<your-dynu-password\>  
+       7. IP address discovery method: *Web-based IP discovery service*[^5]  
+       8. Hosts to update: \< example.com, www.example.com \>  
+    2. When the script completes, verify an update to [the Dynu Control Panel](https://www.dynu.com/en-US/ControlPanel/DDNS),
+    then confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
 
 7. Set up email notifications per the [howto](https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail).
 
