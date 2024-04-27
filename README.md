@@ -61,11 +61,13 @@ reconstruction is complete.
    1. Repositories need to be set for "no subscription" according to the relevant
    [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
    Both GUI and CLI options are provided on the page.
-   3. The system will need an `sudo apt update -y && sudo apt upgrade -y` command, of course.
-   5. Install git with `sudo apt install git -y`
+   2. The system will need an `sudo apt update -y && sudo apt upgrade -y` command, of course.
+   3. Install git with `sudo apt install git -y`
+   4. Check the [howto](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
+      for information on setting up your git account on your server, if you need.
    6. gpg is already installed, you must to add your private key and configure according
    to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine)
-   on the \<adminuser\>[^4].
+   on the \<adminuser\> account[^4].
    7. A local "git" repository needs made for this documentation as well as the scripts
    for performing further setup to simplify fresh installations.
    8. Create the directory for this and other git "projects," clone the script site, and
