@@ -57,7 +57,7 @@ reconstruction is complete.
    This is through the PVE Web, Datacenter:firewall/options, select "Firewall" on the right-side panel and
    the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok."
 
-5. Ogoing Maintenance  
+5. Prepare for on-going maintenance  
    1. Repositories need to be set for "no subscription" according to the relevant
    [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
    Both GUI and CLI options are provided on the page.
@@ -78,20 +78,20 @@ reconstruction is complete.
       ```
 
 6. Set domain name using https://www.dynu.com (optional if fixed IP)  
-  * Run `sudo ./DynuSetup.sh`
-  * Answer the following questions for Dynu:
-    1. Dynamic DNS service provider: *other*
-    2. Dynamic DNS update protocol: *dyndns2*
-    3. Dynamic DNS server: *api.dynu.com*
-    4. Username: *<your-user-name>*
-    5. Password: *<your-password>*
-    6. Re-enter password: *<your-password>*
-    7. IP address discovery method: *Web-based IP discovery service*[^5]
-    8. Hosts to update: *< example.com, www.example.com >*
-  * When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
-  * Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
+  1. Run `sudo ./DynuSetup.sh`  
+    Answer the following questions for Dynu:  
+    1. Dynamic DNS service provider: *other*  
+    2. Dynamic DNS update protocol: *dyndns2*  
+    3. Dynamic DNS server: *api.dynu.com*  
+    4. Username: \<your-dynu-user-name\>  
+    5. Password: \<your-dynu-password\>  
+    6. Re-enter password: \<your-dynu-password\>  
+    7. IP address discovery method: *Web-based IP discovery service*[^5]  
+    8. Hosts to update: \< example.com, www.example.com \>  
+  3. When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
+  4. Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
 
-7. Set up email notifications per https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail/
+7. Set up email notifications per the [howto](https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail).
 
   * Set up and confirm email alerts work through Gmail as a relay. The directions are fine
       as long asyou also set up postfix.
