@@ -61,12 +61,14 @@ reconstruction is complete.
    1. Repositories need to be set for "no subscription" according to the relevant
    [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
    Both GUI and CLI options are provided on the page.
-   3. The system will need an `apt-get update && apt-get upgrade` command, of course.
-   4. A local "git" repository needs made for this documentation as well as the scripts
+   3. The system will need an `sudo apt update -y && sudo apt upgrade -y` command, of course.
+   5. Install git with `sudo apt install git -y`
+   6. gpg is already installed, you must to add your private key and configure according
+   to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine)
+   on the \<adminuser\>[^4].
+   7. A local "git" repository needs made for this documentation as well as the scripts
    for performing further setup to simplify fresh installations.
-   5. gpg is already installed, I just need to add my private key and configure according
-   to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine).
-   6. Create the directory for this and other git "projects," clone the script site, and
+   8. Create the directory for this and other git "projects," clone the script site, and
    change to that directory.
 ```
 mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git
@@ -82,7 +84,7 @@ cd ~/projects/bigrig-scripts
     4. Username: *<your-user-name>*
     5. Password: *<your-password>*
     6. Re-enter password: *<your-password>*
-    7. IP address discovery method: *Web-based IP discovery service*[^4]
+    7. IP address discovery method: *Web-based IP discovery service*[^5]
     8. Hosts to update: *< example.com, www.example.com >*
   * When the script completes, verify an update to https://www.dynu.com/en-US/ControlPanel/DDNS
   * Confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
@@ -103,5 +105,8 @@ in further stages of installation and development, such as with "git" identity o
 server.
 [^3]: The [PVE Firewall](https://pve.proxmox.com/wiki/Firewall#_configuration_files) has
 a hard-coded exceptions: "WebGUI(8006) and ssh(22) from your local network."
-[^4]: This selection avoids confusing your internal network interface from the external
+[^4]: While a GPG key isn't necessary, strictly speaking, it is a good practice and assumed
+as part of these instructions for the consistency of PVE rebuild events. If you *have* a GPG
+key within Github, it *will* be required here.
+[^5]: This selection avoids confusing your internal network interface from the external
 interface presented to the world.
