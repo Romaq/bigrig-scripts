@@ -68,14 +68,14 @@ reconstruction is complete.
    6. gpg is already installed, you must to add your private key and configure according
    to another [howto](https://aalonso.dev/blog/2022/how-to-generate-gpg-keys-sign-commits-and-export-keys-to-another-machine)
    on the \<adminuser\> account[^4].
-   7. A local "git" repository needs made for this documentation as well as the scripts
-   for performing further setup to simplify fresh installations.
-   8. Create the directory for this and other git "projects," clone the script site, and
-   change to that directory.
-```
-mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git
-cd ~/projects/bigrig-scripts
-```
+   7. A local \<adminuser\> "git" repository needs made for this documentation as well as the
+      scripts for performing further setup to simplify fresh installations[^6]. Create the
+      directory for this and other git "projects," clone the script site, and change to that
+      directory.
+      ```
+      mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git
+      cd ~/projects/bigrig-scripts/bigrig-scripts
+      ```
 
 6. Set domain name using https://www.dynu.com (optional if fixed IP)  
   * Run `sudo ./DynuSetup.sh`
