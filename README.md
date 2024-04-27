@@ -23,20 +23,20 @@ reconstruction is complete.
     Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1][^2].  
     1. Bring the server up-to-date and install `sudo`, then place the user into the sudo group.
     ```
-       apt update -y && apt upgrade -y
-       apt install sudo
-       usermod -aG sudo <user>
+    apt update -y && apt upgrade -y
+    apt install sudo
+    usermod -aG sudo <user>
     ```
       Note: Ignore the warning messages, those are resovled later in these instructions.
     
     2. Become the user, create the .ssh directory with the correct permissions, and create
     the `authorized_keys` file.    
     ```
-       sudo -i -u <user>
-       mkdir -p .ssh
-       touch .ssh/authorized_keys
-       chmod -R go-rwx .ssh
-       vi .ssh/authorized_keys
+    sudo -i -u <user>
+    mkdir -p .ssh
+    touch .ssh/authorized_keys
+    chmod -R go-rwx .ssh
+    vi .ssh/authorized_keys
     ```
     3. Place your public key into this file, save, and exit the user login. Verify this key works using SSH.
     4. Either use `sudo -i` or login directly as root and lock down sshd editing the `/etc/ssh/sshd_config`
