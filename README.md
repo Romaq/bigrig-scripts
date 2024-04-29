@@ -95,7 +95,7 @@ reconstruction is complete.
 7. Set up email notifications per the [howto](https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail).
 
 8. Prepare the zfs storage tank.
-   1. Within the GUI, use `Datacenter/\<host\>:Disks\ZFS` and click the "Create: ZFS" button.
+   1. Within the GUI, use `Datacenter/<host>:Disks/ZFS` and click the "Create: ZFS" button.
    2. Use "tank" for the name, "Add Stoage: [X]", RAID Level: RAIDZ, Compression: on, ashift 12, select all 5 SATA drives,
       then the "Create" button. This "tank" is already mounted as `/tank` at the root.
    3. 
