@@ -98,7 +98,7 @@ reconstruction is complete.
    1. Within the GUI, use `Datacenter/<host>:Disks/ZFS` and click the "Create: ZFS" button.
    2. Use "tank" for the name, "Add Storage: [X]", RAID Level: RAIDZ, Compression: on, ashift 12, select all 5 SATA drives,
       then the "Create" button. This "tank" is already mounted as `/tank` at the root.
-   3. Install Ceph through the PVE (Note: be sure to select the "No Subscription" repository!)
+   3. ~~Install Ceph through the PVE (Note: be sure to select the "No Subscription" repository!)~~
 9. Download .iso files to the storage tank.
 
 # Footnotes
