@@ -71,7 +71,8 @@ reconstruction is complete.
    6. A local \<adminuser\> "git" repository needs made for this documentation as well as the
       scripts for performing further setup to simplify fresh installations[^6]. Create the
       directory for this and other git "projects," clone the script site, and change to that
-      directory.
+      directory. Keep in mind, if you are not using SSH Key forwarding (such as when using the
+      built-in shell window of the web GUI), it won't work. SSH into this with key forwarding!
       ```
       mkdir -p ~/projects && cd ~/projects && git clone git@github.com:Romaq/bigrig-scripts.git
       cd ~/projects/bigrig-scripts/bigrig-scripts
