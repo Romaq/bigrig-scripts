@@ -35,10 +35,10 @@ Outlines of Approaches to System Organization
 ## Fileserver Organization
    1. PVE has direct access to and provides the support of "storage" as defined in "Datacenter-Storage".
       * PVE will store data on the root SSD that benefit from speed, but is *not* consider protected from drive failure:
-        - "local" filesystem provides "VZDump backup files" and "Snippets" for speed. To avoid confusion, there is a
+        - "local" filesystem provides "Snippets" for speed. To avoid confusion, there is a
            [link to Snippets information](https://forum.proxmox.com/threads/explaining-snippets-feature.53553/). While
-           set initially on "local", the "ISO Image" and "(LXC) Container Templates" will be moved to the "/tank" SATA
-           system, mentioned later in this outline.
+           set initially on "local", the "ISO Image", "(LXC) Container Templates" and "VZ Dump" folders will be moved
+           to the "/tank" SATA system, mentioned later in this outline.
         - "local-zfs" block device provides the "Disk image" and "Container" storage for root filesystems and block
            device backup storage for host snapshot backups managed by PVE.
       * PVE will provide a ZFS pool named "tank" hosting RAIDz protected from single SATA drive failure, and is thus
@@ -58,6 +58,10 @@ Outlines of Approaches to System Organization
         - `/tank/filesystem/shared/` is a dataset for files to be easily shared among hosts and clients without an
           explicitly defined host, client, or user. This is appropriate of media such as music or images, with
           sub-folders created based upon the expected content within.
+        - `/tank/dump/` is a dataset for whole machine backups made by PVE. The "choice" of folder names is the default
+          for PVE. The resulting files are a name "vzdump-lxc-###-time-date-stamp.tar.gz" (the ### is the LXC number in
+          proxmox). This default can be altered for clarity, but I'm explicitly avoiding changing any defaults without
+          cause.
           
    2. Given the above datasets provided by PVE, the Fileserver will in turn host the datasets on the shared network
         as appropriate to SMB clients:
