@@ -27,7 +27,7 @@ Outlines of Approaches to System Organization
       This Fileserver appliance provides controlled access to "shared SATA" file storage on PVE. The notion of "fast"
       storage is built into the root file-system of each machine running off PVE's SDD drive. Other appliances such as
       a "Linux Nginx MariaDB PHP" server can simply use network protocols to communicate if needed to other clients
-      on the LAN. "Slow SATA" through NFS is adequate for "slow filesystem" sharing.
+      on the LAN. "Slow SATA" through the SMB Fileserver is adequate for "slow filesystem" sharing.
    5. Other supported systems (LXC and VM systems)  
       Gameservers, potential VMWare Windows machines, any other container of interest. It must be isolated so as not
       to potentially harm any other system on the network.
