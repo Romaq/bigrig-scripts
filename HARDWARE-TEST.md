@@ -47,3 +47,100 @@ I'm expecting (given my current set-up) it will email me the hardware failure. I
 a sizable block of an image to the degraded array, and then confirm the recovery steps Kingneutron suggests
 while confirming zfs instructs me to do the same, and that the recovery steps work. I will also verify the
 large image written to the drive in the degraded mode functions as expected.
+
+I did not receive a warning email as expected. At this stage, I am still working on the specific "setup
+configuration". As this specific hardware test passed, I am comfortable with repeating the test at a further
+stage of development to ensure *if* the hardware fails on one of the SATA drives, I *will* be sent an email
+warning by the PVE host.
+
+Now to the specifics of the simulated hardware failure. `zpool status -P` returns the following information:
+```
+  pool: rpool
+ state: ONLINE
+  scan: scrub repaired 0B in 00:00:09 with 0 errors on Sun May 12 00:24:10 2024
+config:
+
+        NAME                                                               STATE     READ WRITE CKSUM
+        rpool                                                              ONLINE       0     0     0
+          /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4cca6d45-part3  ONLINE       0     0     0
+
+errors: No known data errors
+
+  pool: tank
+ state: DEGRADED
+status: One or more devices could not be used because the label is missing or
+        invalid.  Sufficient replicas exist for the pool to continue
+        functioning in a degraded state.
+action: Replace the device using 'zpool replace'.
+   see: https://openzfs.github.io/openzfs-docs/msg/ZFS-8000-4J
+  scan: scrub repaired 0B in 00:00:02 with 0 errors on Sun May 12 00:24:15 2024
+config:
+
+        NAME                      STATE     READ WRITE CKSUM
+        tank                      DEGRADED     0     0     0
+          raidz1-0                DEGRADED     0     0     0
+            /dev/sda1             ONLINE       0     0     0
+            16009700495985350329  FAULTED      0     0     0  was /dev/sdb1
+            /dev/sdb1             ONLINE       0     0     0
+            /dev/sdc1             ONLINE       0     0     0
+            /dev/sdd1             ONLINE       0     0     0
+
+errors: No known data errors
+```
+On the SATA array as viewed from the side of the drives plugged in (and the writing on the bay is face up),
+the "Target 3" light is out until the entire array spins down to "sleep", in which case all lights go out
+as expected. I note the drives are assigned letters right-to-left, so the pulled drive was labled `/dev/sdb`,
+although that namespace has been reassigned to the middle drive. I also note ZFS is fussy to specify drives
+by a "drive ID," noted here as a number that appears to be decimal 16009700495985350329. I note the hex value
+for that decimal number is DE2D E1C7 2F9A 16B9. I also note "/dev/disk/by-partlabel/zfs-################" in
+the existing `/dev/disk/by-partlabel` directory. I recall in my reading that zfs maintains drive identity to
+a unique serial number rather than by device position. In a future test, I will verify I can remove one drive
+while swapping sevral others, and the array should work fine: drive physical placement in the array is not
+significant to zfs pool.
+
+I have already selected several images to write to /tank in the degraded status. Now to power down PVE,
+replace the drive, and set about recovery, then verify the images are unchanged.
+```
+# zpool status -P
+  pool: rpool
+ state: ONLINE
+  scan: scrub repaired 0B in 00:00:09 with 0 errors on Sun May 12 00:24:10 2024
+config:
+
+        NAME                                                               STATE     READ WRITE CKSUM
+        rpool                                                              ONLINE       0     0     0
+          /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4cca6d45-part3  ONLINE       0     0     0
+
+errors: No known data errors
+
+  pool: tank
+ state: ONLINE
+  scan: resilvered 256K in 00:00:01 with 0 errors on Tue May 21 10:56:21 2024
+config:
+
+        NAME           STATE     READ WRITE CKSUM
+        tank           ONLINE       0     0     0
+          raidz1-0     ONLINE       0     0     0
+            /dev/sda1  ONLINE       0     0     0
+            /dev/sdb1  ONLINE       0     0     0
+            /dev/sdc1  ONLINE       0     0     0
+            /dev/sdd1  ONLINE       0     0     0
+            /dev/sde1  ONLINE       0     0     0
+
+errors: No known data errors
+```
+And "resilvering" was both automatic and practically instant. I just brought the machine online and I
+didn't have time to see the drive in a degraded state before it was recovered! I also note the serial
+number provided by `zpool status -P` does not match anything I see currently in `/dev/disk`. But given
+the process, zfs "just handled it," and I'm not going to focus on something I can't do anything about.
+I *expect* if I replaced the failed drive with an entirely new drive, I would have to tell zpool to
+accept that new drive into the array. Without the replacement drive, I simply cannot verify this. But
+someone who has such a drive available *should* verify this, and I would be happy to include their work
+in this document with credit.
+
+The only wrinkle remaining is to have the PVE host email a warning as it detects a drive failure. The
+warning email does show in `/var/spool`, but I also had problems with connectivity with PVE and hosts.
+My router also reset, and I will need to sort out resetting the host when the router does an update or
+resets. The "warning" system worked, although receipt of that warning is a flaw with other systems not
+in the context of this document. In a future test, I will swap drives in addition to other suggestions
+on how to verify drive failure response.
