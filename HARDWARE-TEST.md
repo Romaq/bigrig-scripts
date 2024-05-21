@@ -53,6 +53,8 @@ configuration". As this specific hardware test passed, I am comfortable with rep
 stage of development to ensure *if* the hardware fails on one of the SATA drives, I *will* be sent an email
 warning by the PVE host.
 
+First Test
+------
 Now to the specifics of the simulated hardware failure. `zpool status -P` returns the following information:
 ```
   pool: rpool
@@ -142,5 +144,20 @@ The only wrinkle remaining is to have the PVE host email a warning as it detects
 warning email does show in `/var/spool`, but I also had problems with connectivity with PVE and hosts.
 My router also reset, and I will need to sort out resetting the host when the router does an update or
 resets. The "warning" system worked, although receipt of that warning is a flaw with other systems not
-in the context of this document. In a future test, I will swap drives in addition to other suggestions
-on how to verify drive failure response.
+in the context of this document.
+
+Second Test
+-----
+On client request, I pulled the middle drive "hot." The zpool immediately went into suspension, and an
+attempt caused the terminal to lock although I could close it and make a new terminal. There is no
+means to [unsuspend](https://github.com/openzfs/zfs/issues/5242) the zpool, and my attempt to power it
+off failed since the system could not unmount the drive. I had to hard-power it down. While the PVE
+was powered off, I swapped the drive on the end into the vacancy in the middle, then I powered the PVE
+back on. The drive came back up degraded, but I could fully read and write the drive in the degraded
+condition. I then placed the "simulated dead" drive back into the open slot while the array was hot.
+This caused the zpool to become suspended again, requiring another physical power-down. I did not take
+the time to reformat the "simulated dead" drive to be able to return an answer quickly to the client.
+
+As hoped, on reboot the replaced drive resilvered before I had opportunity to get online and verify
+the "degraded" condition of the array. In any future test, the drive will need to be reformatted or
+an actually new drive will need to be put into the array.
