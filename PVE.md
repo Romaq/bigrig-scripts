@@ -35,7 +35,14 @@ Outline of build for the PVE host
       would be prudent to comment it out.
    4. Edit `/etc/ssh/sshd_config` to replace `#PasswordAuthentication yes` with `PasswordAuthentication no`.
    5. `systemctl restart ssh` to reload the new configuration.
-   6. The server will require updates, so follow this next [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
+   6. The server will require updates, so follow this next [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/). There are both CLI and GUI instructions, choose which you find most comfortable.
+   7. If you prefer CLI, you should already know to do `apt update && apt upgrade`. Otherwise, there is a `Updates` button
+      just above the `Repositories` section you were just working in. The `Refresh` button is functionally the same as the
+      `apt update` command from CLI, and it will show a list of packages to be updated. If you select the `>_ Upgrade`
+      button, all will be upgraded. Otherwise, select the specific packages you wish to upgrade and do the same to upgrade
+      only that specific packages. It is wise to periodically check this for package updates. It is also wise to reboot
+      the PVE host at this point to be sure you are running the updated software from this point forward.
+   8.
 
 ## Footnotes:
    [^1]: On the decision to create a non-root user, there is a [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/)
