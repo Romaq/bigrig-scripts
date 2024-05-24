@@ -25,8 +25,17 @@ Outline of build for the PVE host
       network. Replace the 'root' user accordingly. Otherwise the following instructions are to secure the PVE host
       for access *only* by user 'root' and *only* within the LAN, dropping all other network traffic.
    2. Lock down the server with the firewall[^2].  
-   This is through the PVE Web, Datacenter:firewall/options, select "Firewall" on the right-side panel and
-   the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok."
+   This is through the PVE Web, Datacenter/pve:firewall/options, select "Firewall" on the right-side panel and
+   the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok" if the firewall is not already
+   activated.
+   3. Lock down SSH for "admin" access only.
+      You should always be able to use the `_ Shell` button for the PVE host if it is online, but as an alternate especially
+      for SCP/SFTP, we will lock down root access for "keys only." Using the `_ Shell` option, edit
+      `/etc/pve/priv/authorized_keys` with SSH keys permitted to access the host root. If there is a key already there, it
+      would be prudent to comment it out.
+   4. Edit `/etc/ssh/sshd_config` to replace `#PasswordAuthentication yes` with `PasswordAuthentication no`.
+   5. `systemctl restart ssh` to reload the new configuration.
+   6. The server will require updates, so follow this next [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
 
 ## Footnotes:
    [^1]: On the decision to create a non-root user, there is a [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/)
@@ -34,4 +43,4 @@ Outline of build for the PVE host
    it will be critical to establish, document, and follow an appropriate policy. In this particular use case, there is
    only one user with full access. To simplify the install process, user 'root' is presumed.
    [^2]: The [PVE Firewall](https://pve.proxmox.com/wiki/Firewall#_configuration_files) has
-   a hard-coded exceptions: "WebGUI(8006) and ssh(22) from your local network."
+   hard-coded exceptions: "WebGUI(8006) and ssh(22) from your local network."
