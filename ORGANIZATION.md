@@ -58,10 +58,8 @@ Outlines of Approaches to System Organization
         - `/tank/filesystem/shared/` is a dataset for files to be easily shared among hosts and clients without an
           explicitly defined host, client, or user. This is appropriate of media such as music or images, with
           sub-folders created based upon the expected content within.
-        - `/tank/dump/` is a dataset for whole machine backups made by PVE. The "choice" of folder names is the default
-          for PVE. The resulting files are a name "vzdump-lxc-###-time-date-stamp.tar.gz" (the ### is the LXC number in
-          proxmox). This default can be altered for clarity, but I'm explicitly avoiding changing any defaults without
-          cause.
+        - `/tank/vz/` is a dataset for various backups, LXC templates, and ISO images. The directories are matained
+          by the PVE software.
           
    2. Given the above datasets provided by PVE, the Fileserver will in turn host the datasets on the shared network
         as appropriate to SMB clients:
