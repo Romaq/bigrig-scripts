@@ -13,6 +13,7 @@
         external world.
       * Does *not* provide user identity. The plan is to maintain this only on the "fileserver" host, then elsewhere
         as required per situation.
+      * Will use [Gotify](gotify.net) as a client to pass notices.
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
 ## Install Actions
@@ -24,14 +25,12 @@
       as determined by practical use.
    5. Logging in at the console, obvious configuations should be entered as obvious (e.g. your email address).
    6. After the reboot, log back in.
-   8. `apt update && apt upgrade` would be next. 
-   9. The "Postfix Configuration" window will come up. Select "Satellite Configuration", and the "System mail name"
-       should be the [FQDN](https://www.hostinger.com/tutorials/fqdn) and include the name of the host.      
-   10. Use the IP for the PVE server as the "SMTP relay host" We don't have DNS yet, and we want this to work even
-       without DNS working, even if it should somehow fail.
-
-   12. 
-   13. 
+   8. `apt update && apt upgrade` would be next.
+   9. The "Postfix Configuration" window will come up, presuming no postfix configuation files are present. Select
+      "Local only", then use your FQDN as the domain name.
+   10. For the purpose of receiving notifications, we need a [gotify server](https://github.com/gotify/server). As
+       this host handles various "non-Turnkey Linux" issues, it is the natural place to put the Gotify server.
+   11. Gotify reqires Docker, 
    14. you should run `confconsole` from the root prompt if it does not load into that on your behalf.
    15. The eth0 server would not need configured at the moment.
    16. Skipping the "Lets encrypt" configuration for now.
