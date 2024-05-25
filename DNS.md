@@ -28,17 +28,18 @@
    8. `apt update && apt upgrade` would be next.
    9. The "Postfix Configuration" window will come up, presuming no postfix configuation files are present. Select
       "Local only", then use your FQDN as the domain name.
-   10. For the purpose of receiving notifications, we need a [gotify server](https://github.com/gotify/server). As
-       this host handles various "non-Turnkey Linux" issues, it is the natural place to put the Gotify server.
-   11. Gotify reqires Docker, 
-   14. you should run `confconsole` from the root prompt if it does not load into that on your behalf.
-   15. The eth0 server would not need configured at the moment.
-   16. Skipping the "Lets encrypt" configuration for now.
-   17. Select "Mail relaying" as we want any emergency emails to forward to PVE.
-   18. Select "Mail relay", then "Custom", 
-   19. Select "Get certificate". You can't renew what you don't have.
-      * Select "dns-01"
-   20. Select "Cert auto renew" 
+   14. This [howto] explains how to set up
+       [Pi-hole](https://www.datahoards.com/installing-pi-hole-inside-a-proxmox-lxc-container/).
+   15. Pi.hole does an excellent job configuring itself but after the install and configuring your DHCP to provide dns
+       as the primary DNS host, it is wise to reboot all of the machines to be using DNS for that purpose.
+   
+   
+## The following steps are pending fit as Gotify becomes better understood.
+   1. For the purpose of receiving notifications, we need a [gotify server](https://github.com/gotify/server). As
+      this host handles various "non-Turnkey Linux" issues, it is the natural place to put the Gotify server.
+   2. Gotify reqires Docker, so follow the [howto] on installing Docker to this instance.
+   3. With Docker installed, follow the directions to [install Gotify](https://gotify.net/docs/install)
+
       
 ## Footnotes:
    [^1]: ...
