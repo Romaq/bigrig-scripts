@@ -29,8 +29,8 @@ Outline of build for the PVE host
    the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok" if the firewall is not already
    activated.
    3. Lock down SSH for "admin" access only.
-      You should always be able to use the `_ Shell` button for the PVE host if it is online, but as an alternate especially
-      for SCP/SFTP, we will lock down root access for "keys only." Using the `_ Shell` option, edit
+      You should always be able to use the `>_ Shell` button for the PVE host if it is online, but as an alternate especially
+      for SCP/SFTP, we will lock down root access for "keys only." Using the `>_ Shell` option, edit
       `/etc/pve/priv/authorized_keys` with SSH keys permitted to access the host root. If there is a key already there, it
       would be prudent to comment it out.
    4. Edit `/etc/ssh/sshd_config` to replace `#PasswordAuthentication yes` with `PasswordAuthentication no`.
@@ -42,8 +42,24 @@ Outline of build for the PVE host
       button, all will be upgraded. Otherwise, select the specific packages you wish to upgrade and do the same to upgrade
       only that specific packages. It is wise to periodically check this for package updates. It is also wise to reboot
       the PVE host at this point to be sure you are running the updated software from this point forward.
-   8.
-
+   8. From "Datacenter/PVE:Disks/ZFS use the `Create: ZFS` button, select all the unused drives in the array, give it the
+      commonly used name "tank-zfs" with a `RAID Level: RAIDZ`, then select `Create`. This will create and mount a zfs pool
+      with the name `/tank-zfs`. Note: While `/tank-zfs` can be used to store data, it is most appropriate to use the PVE "Storage"
+      containers and have datasets to manage options such as compression and storage.
+   9. In "Datacenter:Storage" you will see a new storage named `tank`. Go ahead and delete that. It may be used for block
+      device storage, but we have `local-zfs` for that purpose and we want to avoid using the SATA array. Instead, we will
+      use cli to create zfs datasets as we need them. Zfs dataset creation is not implimented in the PVE GUI, but the cli
+      process is simple for what we intend. Drop into CLI using SSH or the `>_ Shell` button on the PVE screen.
+   10. `zfs create -p tank/vz` will create a dataset with the defaults and no quota, but options can be set on the dataset
+       later. Note: Those options (such as compression changes) may not take effect except on new files added.
+   11. On `Datacenter:Storage` use the `Add` button and select `Directory`. Give it an ID of "tank" and the directory is
+       `tank/vz`. The `Shared:` box should be off, as there are no additional nodes in this setup. Select the `Content:`
+       button and add `VZDump backup file`, `Container template`, and `ISO image`. This is where "whole-machine" backups,
+       LXC Container templates, and bootable ISO images will go.
+   12. We want to turn *OFF* those options from "local", select it and use "Edit" and deactivate those selections in
+       `Content:`, and make sure "Snippets" is active. If "Snippets" come into use, they will be small, benefit from the
+       faster drive, and you can't save the options unless one of those is selected anyway.
+       
 ## Footnotes:
    [^1]: On the decision to create a non-root user, there is a [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/)
    page with instructions. In an environmment where there are multiple users with levels of access to the PVE host,
