@@ -15,20 +15,18 @@ Outlines of Approaches to System Organization
       a DNS provided by the external ISP in the event the Primary is unavailable (or doesn't exist yet).
    2. PVE (physical machine)  
       This is the Proxmox Virtual Environment hosting all other self-contained systems as either a Linux Container or
-      a Virtual Machine. The PVE must be a) Stable to provide hardware resources such as a single SATA Raid device,
-      and b) provide and maintain a single external-facing identity, both with [Dynu](https://dynu.com) and
-      [Let's Encrypt](letsencrypt.org) certificate identity. All other considerations fall under the "don't do anything
-      unless required" policy.
-   3. DNS (LXC)  
+      a Virtual Machine. The PVE must be a) Stable to provide hardware resources such as a single SATA Raid device. All
+      other considerations fall under the "don't do anything unless required" policy.
+   4. DNS (LXC)  
       This DNS appliance provides identity to the entire local network, as "Local DNS" is not supplied by the Gateway
       host. In cases where DNS is supplied by the local gateway or by other means, this machine should of course be
       completely ignored.
-   4. Fileserver (LXC)  
+   5. Fileserver (LXC)  
       This Fileserver appliance provides controlled access to "shared SATA" file storage on PVE. The notion of "fast"
       storage is built into the root file-system of each machine running off PVE's SDD drive. Other appliances such as
       a "Linux Nginx MariaDB PHP" server can simply use network protocols to communicate if needed to other clients
       on the LAN. "Slow SATA" through the SMB Fileserver is adequate for "slow filesystem" sharing.
-   5. Other supported systems (LXC and VM systems)  
+   6. Other supported systems (LXC and VM systems)  
       Gameservers, potential VMWare Windows machines, any other container of interest. It must be isolated so as not
       to potentially harm any other system on the network.
 
