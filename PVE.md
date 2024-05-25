@@ -34,8 +34,8 @@ Outline of build for the PVE host
    3. Lock down SSH for "admin" access only.
       You should always be able to use the `>_ Shell` button for the PVE host if it is online, but as an alternate especially
       for SCP/SFTP, we will lock down root access for "keys only." Using the `>_ Shell` option, edit
-      `/etc/pve/priv/authorized_keys` with SSH keys permitted to access the host root. If there is a key already there, it
-      would be prudent to comment it out.
+      `/etc/pve/priv/authorized_keys` with SSH keys permitted to access the host root. If there is a key already there, PVE
+      seems to put a fresh new key if one does not exist for it to function. Removing that key is futile.
    4. Edit `/etc/ssh/sshd_config` to replace `#PasswordAuthentication yes` with `PasswordAuthentication no`.
    5. `systemctl restart ssh` to reload the new configuration.
    6. The server will require updates, so follow this next [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/). There are both CLI and GUI instructions, choose which you find most comfortable.
