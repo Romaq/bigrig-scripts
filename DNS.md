@@ -7,7 +7,7 @@ Outline of build for the DNS host
         "BitterGreen" (the wireless name) or "local" (the hostname with .local implied).
       * The external identity will be maintained through [Dynu](https://dynu.com) with a domain certificate maintained
         by [Let's Encrypt](https://letsencrypt.org)
-      * Internal "domain" identity will be provided by (Pi-Hole)[https://pi-hole.net] with the added benefit of domain
+      * Internal "domain" identity will be provided by [Pi-Hole](https://pi-hole.net) with the added benefit of domain
         ad blocking.
       * Does *not* provide file services managed by a "fileserver" LTK appliance.
       * Does *not* provide user identity. The plan is to maintain this only on the "fileserver" host, then elsewhere
@@ -15,8 +15,13 @@ Outline of build for the DNS host
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
 ## Install Actions
-   1. On the PVE host, select "Datacenter/pve/tank:CT Templates" then select the `Templates` button. It will provide
-      a list of [Turnkey Linux](turnkeylinux.org) images for use.
+   1. There is a [howto](https://www.datahoards.com/installing-pi-hole-inside-a-proxmox-lxc-container/) on installing
+      Pi-Hole into a Proxmox container. Reference notes follow.
+   2. [TKL Core](https://www.turnkeylinux.org/core) is used consistent with other TKL templates.
+   3. A name of "DNS" dictates what the machine is and does primarily.
+   4. I am using 8 GiB for disk space, 2 Cores, 512 MiB of memory. These values can be changed and updated as required
+      as determined by practical use.
+   5. 
        
 ## Footnotes:
    [^1]: ...
