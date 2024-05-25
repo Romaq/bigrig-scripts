@@ -47,21 +47,28 @@ Outline of build for the PVE host
       the PVE host at this point to be sure you are running the updated software from this point forward.
    8. From "Datacenter/PVE:Disks/ZFS use the `Create: ZFS` button, select all the unused drives in the array, give it the
       commonly used name "tank-zfs" with a `RAID Level: RAIDZ`, then select `Create`. This will create and mount a zfs pool
-      with the name `/tank-zfs`. Note: While `/tank-zfs` can be used to store data, it is most appropriate to use the PVE "Storage"
-      containers and have datasets to manage options such as compression and storage.
-   9. In "Datacenter:Storage" you will see a new storage named `tank`. Go ahead and delete that. It may be used for block
+      with the name `/tank-zfs`. Note: While `/tank-zfs` can be used to store data, it is most appropriate to use the PVE
+      "Storage" containers and have datasets to manage options such as compression and storage.
+   10. In "Datacenter:Storage" you will see a new storage named `tank`. Go ahead and delete that. It may be used for block
       device storage, but we have `local-zfs` for that purpose and we want to avoid using the SATA array. Instead, we will
       use cli to create zfs datasets as we need them. Zfs dataset creation is not implimented in the PVE GUI, but the cli
       process is simple for what we intend. Drop into CLI using SSH or the `>_ Shell` button on the PVE screen.
-   10. `zfs create -p tank/vz` will create a dataset with the defaults and no quota, but options can be set on the dataset
+   11. `zfs create -p tank/vz` will create a dataset with the defaults and no quota, but options can be set on the dataset
        later. Note: Those options (such as compression changes) may not take effect except on new files added.
-   11. On `Datacenter:Storage` use the `Add` button and select `Directory`. Give it an ID of "tank" and the directory is
+   12. On `Datacenter:Storage` use the `Add` button and select `Directory`. Give it an ID of "tank" and the directory is
        `tank/vz`. The `Shared:` box should be off, as there are no additional nodes in this setup. Select the `Content:`
        button and add `VZDump backup file`, `Container template`, and `ISO image`. This is where "whole-machine" backups,
        LXC Container templates, and bootable ISO images will go.
-   12. We want to turn *OFF* those options from "local", select it and use "Edit" and deactivate those selections in
+   13. We want to turn *OFF* those options from "local", select it and use "Edit" and deactivate those selections in
        `Content:`, and make sure "Snippets" is active. If "Snippets" come into use, they will be small, benefit from the
        faster drive, and you can't save the options unless one of those is selected anyway.
+   14. PVE must be able to receive "localdomain" only email and route that outbound to a private GMail account so warnings
+       from any PVE host (or the Mac-Mini) can send a notice that can be received remotely. This
+       [howto](https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail/)
+       explains this in detail.
+   16. This *optional* step [howto](https://www.naturalborncoder.com/linux/2023/07/14/automatic-updates-on-debian/) explains
+       how to set up automatic updates on the PVE host, although if one chooses to do this manually, one should make it
+       a point to schedule and *do* update for security of the PVE host!
        
 ## Footnotes:
    [^1]: On the decision to create a non-root user, there is a [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/)
