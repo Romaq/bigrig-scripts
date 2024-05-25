@@ -74,7 +74,7 @@ Outline of build for the PVE host
          somewhere, such as the router firewall becoming misconfigured. Note: There is an
          [issue](https://github.com/Romaq/bigrig-scripts/issues/5) with setting the IPv6 firewall rule.
        * Rebooting the machine and then using "telnet <pve> 25" to attempt to connect from a host on the local net would
-         be a useful test.
+         be a useful test. Note: At this time, mail notifications still need to be better understood and worked on.
    16. This *optional* step [howto](https://www.naturalborncoder.com/linux/2023/07/14/automatic-updates-on-debian/) explains
        how to set up automatic updates on the PVE host, although if one chooses to do this manually, one should make it
        a point to schedule and *do* update for security of the PVE host!
