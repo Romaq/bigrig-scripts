@@ -15,7 +15,8 @@ Outline of build for the DNS host
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
 ## Install Actions
-   1. ...
+   1. On the PVE host, select "Datacenter/pve/tank:CT Templates" then select the `Templates` button. It will provide
+      a list of [Turnkey Linux](turnkeylinux.org) images for use.
        
 ## Footnotes:
    [^1]: ...
