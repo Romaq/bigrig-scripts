@@ -13,7 +13,7 @@
         external world.
       * Does *not* provide user identity. The plan is to maintain this only on the "fileserver" host, then elsewhere
         as required per situation.
-      * Will use [Gotify](gotify.net) as a client to pass notices.
+      * Notifications by Gotify are pending, but may be implimented on this host.
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
 ## Install Actions
