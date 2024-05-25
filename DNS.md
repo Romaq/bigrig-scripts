@@ -1,4 +1,4 @@
-Outline of build for the DNS host
+ Outline of build for the DNS host
 ======
 
 ## Build Goal (Working Rules)
@@ -23,21 +23,23 @@ Outline of build for the DNS host
    4. I am using 8 GiB for disk space, 2 Cores, 512 MiB of memory. These values can be changed and updated as required
       as determined by practical use.
    5. Logging in at the console, obvious configuations should be entered as obvious (e.g. your email address).
-   6. After the reboot, if other configuration options appear, simply use the defaults or obvious setting changes for
-      your site.
+   6. After the reboot, log back in.
    8. `apt update && apt upgrade` would be next. 
    9. The "Postfix Configuration" window will come up. Select "Satellite Configuration", and the "System mail name"
-       should be the [FQDN](https://www.hostinger.com/tutorials/fqdn). 
-   11. Use the IP for the PVE server as the "SMTP relay host".
+       should be the [FQDN](https://www.hostinger.com/tutorials/fqdn) and include the name of the host.      
+   10. Use the IP for the PVE server as the "SMTP relay host" We don't have DNS yet, and we want this to work even
+       without DNS working, even if it should somehow fail.
+
    12. 
-   13. you should run `confconsole` from the root prompt if it does not load into that on your behalf.
-   14. The eth0 server would not need configured at the moment.
-   15. Skipping the "Lets encrypt" configuration for now.
-   16. Select "Mail relaying" as we want any emergency emails to forward to PVE.
-   17. Select "Mail relay", then "Custom", 
-   18. Select "Get certificate". You can't renew what you don't have.
+   13. 
+   14. you should run `confconsole` from the root prompt if it does not load into that on your behalf.
+   15. The eth0 server would not need configured at the moment.
+   16. Skipping the "Lets encrypt" configuration for now.
+   17. Select "Mail relaying" as we want any emergency emails to forward to PVE.
+   18. Select "Mail relay", then "Custom", 
+   19. Select "Get certificate". You can't renew what you don't have.
       * Select "dns-01"
-   19. Select "Cert auto renew" 
+   20. Select "Cert auto renew" 
       
 ## Footnotes:
    [^1]: ...
