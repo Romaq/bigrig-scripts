@@ -3,10 +3,13 @@ Outline of build for the PVE host
 
 ## Build Goal (Working Rules)
    1. The purpose of this machine is as follows:
-      * Provide control of the working hardware including a SDD "root" drive for small but fast applications
+      * Provide control of the working hardware including a SDD "root" drive for small but fast applications.
       * Provide control of a slower but much larger SATA array for long-term storage or file sharing among the clients
-        of the network
-      * Provide the hypervisor control over LXC and VM machines
+        of the network.
+      * Provide the hypervisor control over LXC and VM machines.
+      * Provide receipt for email from the local domain hosts and internal receipt, then send the mail to a private
+        gmail account for notice. It *must* reside on PVE should attached VMs run into trouble, particularly if the
+        mailserver were on a separate host.        
       * Does *not* provide file services managed by a "fileserver" LTK appliance.
       * Does *not* provide user, host or client identity services such as DNS or Certificate authority such as [Let's
         Encrypt](https://letsencrypt.org).
