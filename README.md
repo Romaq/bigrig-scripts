@@ -16,48 +16,22 @@ reconstruction is complete.
 
 # Milestones
 
-1. Complete the install of Proxmox 8.2 using default settings and obvious settings for
-   the machine name and root password.
+1. Install [PVE](https://github.com/Romaq/bigrig-scripts/blob/main/PVE.md) (the Proxmox Virtual Environment)
 
-2. SSH/ Console security first     
-    Confirm SSH is open. Make a user with sudo privilages on the shell and admin privilages in PVE[^1][^2].  
-    1. Bring the server up-to-date and install `sudo`, then place the user into the sudo group.
-    ```
-    apt update -y && apt upgrade -y
-    apt install sudo
-    usermod -aG sudo <user>
-    ```
-      Note: Ignore the warning messages, those are resovled later in these instructions.
-    
-    2. Become the user, create the .ssh directory with the correct permissions, and create
-    the `authorized_keys` file.    
-    ```
-    sudo -i -u <user>
-    mkdir -p .ssh
-    touch .ssh/authorized_keys
-    chmod -R go-rwx .ssh
-    vi .ssh/authorized_keys
-    ```
-    3. Place your public key into this file, save, and exit the user login. Verify this key works using SSH.
-    4. Either use `sudo -i` or login directly as root and lock down sshd editing the `/etc/ssh/sshd_config`
-       file for the following changes:
-       * Change `PermitRootLogin` to `no`.
-       * Change `PasswordAuthentication` to `no`.
-       * Save the changes, then invoke `systemctl restart sshd` to load the changes in.
-       * Ensure you are not using a key agent to attempt to login as root with the password, user with the
-         password, and *then* load the key to verify access via ssh can only be done using the proper key.
-3. With reference to this [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/),
+2. Install [DNS](https://github.com/Romaq/bigrig-scripts/blob/main/DNS.md) (the DNS Server Appliance)
+
+2. With reference to this [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/),
    invoke the following:
    ```
    pveum user add <user>@pam
    pveum user list
    pveum acl modify / --roles PVEAdmin --users <user>@pam
    ```
-4. Lock down the server with the firewall[^3].
+3. Lock down the server with the firewall[^3].
    This is through the PVE Web, Datacenter:firewall/options, select "Firewall" on the right-side panel and
    the "edit" button above that. Select the "Firewall" checkbox on the pop-up and "ok."
 
-5. Prepare for on-going maintenance  
+4. Prepare for on-going maintenance  
    1. Repositories need to be set for "no subscription" according to the relevant
    [howto](https://www.virtualizationhowto.com/2022/08/proxmox-update-no-subscription-repository-configuration/).
    Both GUI and CLI options are provided on the page.
@@ -78,7 +52,7 @@ reconstruction is complete.
       cd ~/projects/bigrig-scripts/bigrig-scripts
       ```
 
-6. Set domain name using https://www.dynu.com (optional if fixed IP)
+5. Set domain name using https://www.dynu.com (optional if fixed IP)
    
     1. Run `sudo ./DynuSetup.sh`  
        Answer the following questions for Dynu:  
@@ -93,14 +67,14 @@ reconstruction is complete.
     2. When the script completes, verify an update to [the Dynu Control Panel](https://www.dynu.com/en-US/ControlPanel/DDNS),
     then confirm the update on the Proxmox host using `sudo journalctl -u ddclient`
 
-7. Set up email notifications per the [howto](https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail).
+6. Set up email notifications per the [howto](https://www.naturalborncoder.com/linux/2023/05/19/setting-up-email-notifications-in-proxmox-using-gmail).
 
-8. Prepare the zfs storage tank.
+7. Prepare the zfs storage tank.
    1. Within the GUI, use `Datacenter/<host>:Disks/ZFS` and click the "Create: ZFS" button.
    2. Use "tank" for the name, "Add Storage: [X]", RAID Level: RAIDZ, Compression: on, ashift 12, select all 5 SATA drives,
       then the "Create" button. This "tank" is already mounted as `/tank` at the root.
    3. ~~Install Ceph through the PVE (Note: be sure to select the "No Subscription" repository!)~~
-9. Download .iso files to the storage tank.
+8. Download .iso files to the storage tank.
 
 # Footnotes
 [^1]: Proxmox Virtual Environment, usually but not necessarily the web
