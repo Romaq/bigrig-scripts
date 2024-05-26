@@ -18,7 +18,11 @@
 
 ## Todo
    1. I am amiss in not doing a snapshot of the fileserver host before configuring and verifying the rollback process.
-   2. I need to set up automated snapshots vs. recovery as part of this build.
+   2. I need to set up automated snapshots vs. recovery as part of this build. I've already done this, but it needs fully
+      worked out within this document.
+   3. I'm seriously considering using the DHCP/DNSMASQ built-in to replace that function within my router. This would not
+      only remove the tedium of manually editing the DNS entries, but the router seems to "hold onto" DNS settings even
+      after I changed it which complicated setting up this host in practice.
 
 ## Install Actions
    1. There is a [howto](https://www.datahoards.com/installing-pi-hole-inside-a-proxmox-lxc-container/) on installing
