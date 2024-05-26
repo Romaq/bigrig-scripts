@@ -78,7 +78,11 @@ Outline of build for a generic host
    4. `./mcserver` brings up a menu of options. You can use the 1-3 letter combination to select from the
       options offered, such as `./mcserver dt` to see current details about the game.
    5. `./mcserver st` returns an error: "\[ FAIL \] Starting mcserver: Unable to start Whimpercraft"
-   6. 
+   6. Now would be a good time to make a snapshot before making changes so you can return to this configuration.
+      To do this, go back to `Datacenter/pve/whimpercraft:Backup`, then select the "Bacup now" button. The
+      defaults are fine, just use the "Backup" button offered.
+   7. With that safely in hand, we can explore changes and roll them back to this save point as needed.
+   8. 
    
 ## The following steps are optional.
    1. [^1]...
