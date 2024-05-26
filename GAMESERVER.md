@@ -82,7 +82,20 @@ Outline of build for a generic host
       To do this, go back to `Datacenter/pve/whimpercraft:Backup`, then select the "Bacup now" button. The
       defaults are fine, just use the "Backup" button offered.
    7. With that safely in hand, we can explore changes and roll them back to this save point as needed.
-   8. 
+   8. Depending on the game server, you may have to ask questions for help outside the scope of this tutorial.
+      In this case, `~/gamesever/log/console` shows the current Java is not up to date with this version of
+      minecraft. According to the [Minecraft Wiki](https://minecraft.wiki/w/Java_Edition#System_requirements),
+      the current release of Minecraft uses Java 21. This will prevent the server from working, as the installed
+      java is 17, and a default package is not available to update at this time.
+   9. A debian package for Java21 is not currently available to me, so I will follow the instructions on the
+      [howto](https://computingforgeeks.com/install-java-jdk-or-openjdk-21-on-debian/) for that.
+      * `mkdir -p ~/Downloads && cd Downloads`
+      * Having moved the file in there, I follow the directions including tracing down which version of Java
+        is actually running so `java -version` returns `openjdk version "22.0.1" 2024-04-16`. This is an exercise
+        best left to the user, although I can provide help as needed, perhaps clarify here.
+      * The server *will* run at this point, but I need to follow further
+        [directions](https://github.com/GameServerManagers/LinuxGSM/discussions/3817) to run the Forge backup
+        I am using.
    
 ## The following steps are optional.
    1. [^1]...
