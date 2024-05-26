@@ -18,10 +18,15 @@ Outline of build for the FILESERVER host
    4. Create the LXC for `filesystem` with the default settings except use 2 cores.
    5. Use the following command to link the created zfs filesystem to the fileserver from the PVE command line[^1]:
       `pct set 101 -mp0 /tank/filesystem,mp=/tank`
+   6. Start the server and have a password ready for the "root samba account." This password is *not* the same as the host
+      root account!
+   7. Enter your email, of course, and note the IP of various services before you close the window. Be sure to add
+      `fileserver` as a new host in the `dns` local domain list.
+      
       
    
 ## The following steps are optional.
-   1. ... [^1]
+   1. ...
 
       
 ## Footnotes:
