@@ -25,7 +25,7 @@ Initially, I considered incorporating a [simulated hardware failure](https://sta
 to test. Unfortunately, my expertise is not at the level for activating fault injection code into the kernel.
 It is also not my intent to recompile the kernel of Proxmox, nor have tools for doing so in place. The PVE
 machine needs to be in a state of "as little change as possible to accomplish the purpose" according to my
-rules as stated on the [Organization](https://github.com/Romaq/bigrig-scripts/blob/main/ORGANIZATION.md) for this
+rules as stated on the [Organization](../main/ORGANIZATION.md) for this
 project: "Don't do *anything* unless it is required to fulfill the mission." That said, I do welcome expertise
 on how to simulate drive failure through software of a live PVE machine as directly as possible and *only*
 pertaining to the event of a single drive failure in the SATA array.
