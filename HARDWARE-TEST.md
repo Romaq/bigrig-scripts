@@ -12,6 +12,15 @@ backup recovery in the event of hardware failure. As my boss once told me, "Spit
 into the other, and see which of your hands fills faster." That zfs drive recovery "should" work simply isn't
 good enough. Prove it does.
 
+Todo
+======
+I note here there testing should be done to simulate live errors on a single drive and verify the behavior of ZFS towards
+notifying admin, simulating the replacement of the "failed" drive by reformating and replacing it in the array, and the
+full recovery process. I plan to test this at a later date according to the "simulated hardware failure" link mentioned
+below.
+
+Testing
+======
 Initially, I considered incorporating a [simulated hardware failure](https://stackoverflow.com/questions/1361518/how-can-i-simulate-a-failed-disk-during-testing)
 to test. Unfortunately, my expertise is not at the level for activating fault injection code into the kernel.
 It is also not my intent to recompile the kernel of Proxmox, nor have tools for doing so in place. The PVE
