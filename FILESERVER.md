@@ -3,7 +3,7 @@ Outline of build for the FILESERVER host
 
 ## Build Goal (Working Rules)
    1. The purpose of this machine is as follows:
-      * Serve files as per [ORGANIZATION.md](https://github.com/Romaq/bigrig-scripts/blob/main/ORGANIZATION.md).
+      * Serve files as per [ORGANIZATION.md](../blob/master/ORGANIZATION.md).
       * Manually maintain a relatively small list of client hosts and client users.
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
