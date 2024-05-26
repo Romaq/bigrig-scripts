@@ -63,7 +63,11 @@ Outline of build for a generic host
    11. While there are other settings to explore, from the Advanced Menu you may select a particular
        "Game server". Naturally, you can't "Update" the server until you "Select game", so do that.
    12. You get a warning you may be prompted for further information, then continue.
-   13. For this example, select Minecraft (Java Edition).
+   13. For this example, select Minecraft (Java Edition). At that point installing the necessary dependencies
+       will begin. On this particular server, it requires a Server admin username, the "Wizard, Op" account
+       name you wish to use on the server. It will also ask for the server name.
+   14. We are told the server is successfully installed and we can connect. You can now quit the consoleconfig
+       running to get back to the prompt.
    
 ## The following steps are optional.
    1. [^1]...
