@@ -7,6 +7,11 @@ Outline of build for the FILESERVER host
       * Manually maintain a relatively small list of client hosts and client users.
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
+## Todo
+   1. I am amiss in not doing a snapshot of the fileserver host before configuring and verifying the rollback
+      process.
+   2. I need to set up automated snapshots vs. recovery as part of this build.
+
 ## Install Actions
    1. First, create the zfs datasets on PVE as described by the ORGANIZATION page linked above.
       * `zfs create -p tank/filesystem/backup` for host specific backups, including internal game backups.
