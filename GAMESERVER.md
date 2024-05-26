@@ -68,6 +68,17 @@ Outline of build for a generic host
        name you wish to use on the server. It will also ask for the server name.
    14. We are told the server is successfully installed and we can connect. You can now quit the consoleconfig
        running to get back to the prompt.
+
+## Starting the new game server
+   1. The command `ss -lnt` will show you if the server is actually running if you know what port to look for.
+      In this case, I'm expecting 25565 to be open, but it is not.
+   2. `sudo -i -u gameuser` will put you in as the "gameuser" account the games run from so you can explore.
+   3. `cd gameserver` puts you in the right directory. You do not need to use `./linuxgsm.sh`, you already did
+      that in the console configuration.
+   4. `./mcserver` brings up a menu of options. You can use the 1-3 letter combination to select from the
+      options offered, such as `./mcserver dt` to see current details about the game.
+   5. `./mcserver st` returns an error: "\[ FAIL \] Starting mcserver: Unable to start Whimpercraft"
+   6. 
    
 ## The following steps are optional.
    1. [^1]...
