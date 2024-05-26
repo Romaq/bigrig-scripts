@@ -7,6 +7,7 @@ Outline of build for a generic host
       * Provide a given game on the host.
       * Perform game data saves as appropriate.
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
+   3. Before you begin with this example, see if the game server you wish to use is [supported](https://linuxgsm.com/servers/)!
 
 ## Todo
    1. Have a plan on the firewall.
@@ -56,6 +57,13 @@ Outline of build for a generic host
       confconsole."
    9. From there, you are provided the connection ports and an option for the "Advanced Menu" to do further
       configuration.
+   10. While the logfiles and other system clock functions for the server are driven by the "real" clock on
+       pve, and that clock runs on UTC time, you may want to set the "Region config" TZ data. It's possible
+       you want the server to think in your "local time" as it applies rather than UTC.
+   11. While there are other settings to explore, from the Advanced Menu you may select a particular
+       "Game server". Naturally, you can't "Update" the server until you "Select game", so do that.
+   12. You get a warning you may be prompted for further information, then continue.
+   13. For this example, select Minecraft (Java Edition).
    
 ## The following steps are optional.
    1. [^1]...
