@@ -28,7 +28,12 @@ Outline of build for the FILESERVER host
       behavior and security policy.
    10. Select `System/Users and Groups`, `Create a new user`, then add yourself. I suggest "new group with the same name as
        user" and a secondary group of "users". Create.
-   12. Next, select `Servers/Samba Windows File Sharing`, 
+   12. Next, select `Servers/Samba Windows File Sharing`, `Samba Groups`, then add Unix group "users" as Samba group "users".
+       Describe them as "Client users on the network."
+   14. `Servers/Samba Windows File Sharing`, `Convert Users`, then select from `Only listed users` for the users in your
+       network. "Convert Users" to have them added.
+   15. `Servers/Samba Windows File Sharing`, `Create File Share`, then select a share name of "Home Directories Share",
+       
       
       
    
