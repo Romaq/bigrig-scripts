@@ -40,8 +40,22 @@ Outline of build for a generic host
       "sane." You can toggle the "Start after created" button to have it going right away.
       
 ## Completing the install
-   1. 
-      
+   1. If your router does not perform local DNS, now is a good time to add those into your local domain
+      configuration.
+   2. With the server running on your screen, you can select the ">_ Console" button to bring up a web
+      console terminal. Login with your root and password.
+   3. On login, you should enter a password for the `Gameuser` account. It does *not* need to be the same as
+      `root`. Twice to confirm a match.
+   4. Skip the Turnkey backup API unless you paid for a subscription.
+   5. Enter your email for server system messages. It will also register you for TurnkeyLinux security
+      allerts, but you can unsubscribe.
+   6. Allow security updates to install, and allow it to reboot, of course. Cool fact: If you do not close
+      the terminal session, it will warn you that it's closed briefly, then reconnect with a login. If you
+      know it's just rebooting, you need not open another terminal window!
+   8. After logging back in as `root`, you are prompted with, "For Advanced commandline config run:
+      confconsole."
+   9. From there, you are provided the connection ports and an option for the "Advanced Menu" to do further
+      configuration.
    
 ## The following steps are optional.
    1. [^1]...
