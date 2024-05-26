@@ -16,6 +16,10 @@
       * Notifications by Gotify are pending, but may be implimented on this host.
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
+## Todo
+   1. I am amiss in not doing a snapshot of the fileserver host before configuring and verifying the rollback process.
+   2. I need to set up automated snapshots vs. recovery as part of this build.
+
 ## Install Actions
    1. There is a [howto](https://www.datahoards.com/installing-pi-hole-inside-a-proxmox-lxc-container/) on installing
       Pi-Hole into a Proxmox container. Reference notes follow.
