@@ -47,10 +47,9 @@ Outlines of Approaches to System Organization
         - `/tank` is the directory source on PVE providing the ZFS Datasets which can be independently configured by
           ZFS fir quotas and other options as desired. Note: No quotas are actually set at this time, but such changes
           can be made "on-the-fly" as determined appropriate with ZFS.
-        - `/tank/template/` is a dataset for ISOs (in "./iso") and LXC Templates (in "./cache")
         - `/tank/filesystem/backup/` is a dataset for each host to make and manage data packups, such as a minecraft
           server backing up `./world` and `./log` files rather than the entire machine. Subfolders per host.
-        - `/tank/filesystem/home/` is a dataset for each named user on the network to store backups of their private
+        - `/tank/filesystem/homes/` is a dataset for each named user on the network to store backups of their private
           files they would wish to carry between Windows clients or have as their "home" directory on a *nix host
           dedicated to client use. Subfolders per LAN user.
         - `/tank/filesystem/shared/` is a dataset for files to be easily shared among hosts and clients without an
