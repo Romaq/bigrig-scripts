@@ -16,10 +16,10 @@ Outline of build for the PVE host
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
       
 ## Todo
-   1. I am amiss in not doing a snapshot of the fileserver host before configuring and verifying the rollback process.
-   2. I need to set up automated snapshots vs. recovery as part of this build.
-   3. This is particularly sensitive because I *only* want to back up the current configuration separate from the
-      SATA backups and snapshots of the other hosts, so I'm not backing up the backups as an Ouroboros.
+   1. Proxmox backups on PVE explicitly DO NOT include PVE. This prevents an "Ouroboros" condition where I make backups
+      of backups, like a snake eating its own tail.
+   2. By careful effort, the "backup" of the PVE amounts to the install .ISO on a thumb drive, these notes, and a regular
+      copy of /etc/pve. That is a significant factor in my "don't do *anything*" policy.
       
 ## Install Actions
    1. Remove any drives other than the boot drive to ensure the install only pertains to the boot and root filesystem.
