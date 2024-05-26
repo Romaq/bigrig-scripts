@@ -14,7 +14,13 @@ Outline of build for the PVE host
       * Does *not* provide user, host or client identity services such as DNS or Certificate authority such as [Let's
         Encrypt](https://letsencrypt.org).
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
-
+      
+## Todo
+   1. I am amiss in not doing a snapshot of the fileserver host before configuring and verifying the rollback process.
+   2. I need to set up automated snapshots vs. recovery as part of this build.
+   3. This is particularly sensitive because I *only* want to back up the current configuration separate from the
+      SATA backups and snapshots of the other hosts, so I'm not backing up the backups as an Ouroboros.
+      
 ## Install Actions
    1. Remove any drives other than the boot drive to ensure the install only pertains to the boot and root filesystem.
       Note: It is quite possible to create a ZFS "drive" that spans both the SSD and the SATA Array as a single drive.
@@ -22,6 +28,7 @@ Outline of build for the PVE host
    2. By having the drive install to zfs as root, you will be able to use zfs datasets to set quotas for other uses.
    3. On power down to reboot, attach the SATA array, remove the USB ISO Boot Installer, allow the machine to fully
       boot to the new PVE OS.
+      
 ## Setup of PVE
    1. Follow site policy[^1].  
       In this particular case, there is only one user of the [SOHO](https://dictionary.cambridge.org/dictionary/english/soho)
