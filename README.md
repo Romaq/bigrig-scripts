@@ -16,9 +16,9 @@ reconstruction is complete.
 
 # Milestones
 
-1. Install [PVE](https://github.com/Romaq/bigrig-scripts/blob/main/PVE.md) (the Proxmox Virtual Environment)
+1. Install [PVE](../main/PVE.md) (the Proxmox Virtual Environment)
 
-2. Install [DNS](https://github.com/Romaq/bigrig-scripts/blob/main/DNS.md) (the DNS Server Appliance)
+2. Install [DNS](../main/DNS.md) (the DNS Server Appliance)
 
 2. With reference to this [howto](https://forum.proxmox.com/threads/add-pam-user-to-pve-admin-group.87036/),
    invoke the following:
