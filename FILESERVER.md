@@ -22,6 +22,13 @@ Outline of build for the FILESERVER host
       root account!
    7. Enter your email, of course, and note the IP of various services before you close the window. Be sure to add
       `fileserver` as a new host in the `dns` local domain list.
+   8. Use your browser to connect to the [GUI](http://fileserver:12321).
+   9. In the web GUI, select `Networking/NFS Exports`, `Select all` and delete the existing exports unless you are comfortable
+      setting up NFS securely. For the purpose of this network, we will be using SMB4 clients all the way for consistant
+      behavior and security policy.
+   10. Select `System/Users and Groups`, `Create a new user`, then add yourself. I suggest "new group with the same name as
+       user" and a secondary group of "users". Create.
+   12. Next, select `Servers/Samba Windows File Sharing`, 
       
       
    
