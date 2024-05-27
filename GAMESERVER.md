@@ -95,7 +95,7 @@ Outline of build for a generic host
         best left to the user, although I can provide help as needed, perhaps clarify here.
       * The server *will* run at this point, but I need to follow further
         [directions](https://github.com/GameServerManagers/LinuxGSM/discussions/3817) to run the Forge backup
-        I am using.
+        I am using. Once I have made the suggested changes, the server runs as expected.
    
 ## The following steps are optional.
    1. [^1]...
