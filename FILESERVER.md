@@ -13,7 +13,12 @@ Outline of build for the FILESERVER host
    2. I need to set up automated snapshots vs. recovery as part of this build.
 
 ## Install Actions
-   1. First, create the zfs datasets on PVE as described by the ORGANIZATION page linked above.
+   1. I am working from "How to setup Turnkey Linux Fileserver on Proxmox VE":
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=UnXxJMjW4LE"
+target="_blank"><img src="http://img.youtube.com/vi/UnXxJMjW4LE/0.jpg" 
+alt="How to setup Turnkey Linux Fileserver on Proxmox VE" width="240" height="180" border="10" /></a>
+
+   2. First, create the zfs datasets on PVE as described by the ORGANIZATION page linked above.
       * `zfs create -p tank/filesystem/backup` for host specific backups, including internal game backups.
       * `zfs create -p tank/filesystem/homes` as a "home" folder for client users on the network.
       * `zfs create -p tank/filesystem/shared` for files to be shared amount the network users and/ or host clients.
