@@ -12,43 +12,41 @@ Outline of build for the FILESERVER host
    2. I need to set up automated snapshots vs. recovery as part of this build.
 
 ## Install Actions
-   1. This [howto](https://www.itsembedded.com/sysadmin/proxmox_bind_unprivileged_lxc/) covers the benefits and liabilities of using
-      a "privilaged" container for the fileserver. For our particular use-case, the [Organization.md](../main/ORGANIZATION.md)
-	  document provides the "short list" of clients and hosts we will be serving, and so we can prepare this ahead of time to provide "unprivilaged" access.
-   2. From [Organization.md](../main/ORGANIZATION.md) we have the following "users" with groupIDs to create:
-      * root
-	  * asmith:asmith, users
+   1. This [howto](https://www.naturalborncoder.com/linux/proxmox/2023/07/06/building-a-nas-using-proxmox-part-1/) forms the basis
+      of the following instructions.
+	  
+   2. From [Organization.md](../main/ORGANIZATION.md) we have the following structure for consideration:
+      * asmith:asmith, users
 	  * mikaela:mikaela, users
 	  * gameserver, gameserver
 	  * whimpercraft, gameserver
 	  * palworld, gameserver
 	  * valheim, gameserver
 	  * asa, gameserver
-   3. To avoid confusion and name collision, the above list on the container will be allocated on the PVE Host with a
-      "fs-" in front and 100000 added to the ID#'s used on the LXC host. We also need to have zfs datasets with the
-	  correct privilages as [documented.](https://docs.oracle.com/cd/E23823_01/html/819-5461/gbace.html) The default
-	  command, `adduser` creates the ID numbers in the "privilaged" range we can't use. Fortunately, we can add
-	  overrides as required. The following will add our first "filesystem user" account:
-	  * 
-	  
+	  At this time, I am not planning for "system" hosts to share data, but the means to do so would be obvious from the
+	  gameservers listed and grouped as appropriate.
    
    
-   
-   1. I am working from "How to setup Turnkey Linux Fileserver on Proxmox VE":
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=UnXxJMjW4LE"
-target="_blank"><img src="http://img.youtube.com/vi/UnXxJMjW4LE/0.jpg" 
-alt="How to setup Turnkey Linux Fileserver on Proxmox VE" width="240" height="180" border="10" /></a>
-   
-   2. First, create the zfs datasets on PVE as described by the ORGANIZATION page linked above.
-      * `zfs create -p tank/filesystem/backup` for host specific backups, including internal game backups.
-      * `zfs create -p tank/filesystem/homes` as a "home" folder for client users on the network.
-      * `zfs create -p tank/filesystem/shared` for files to be shared amount the network users and/ or host clients.
-   2. Download the [fileserver LXC](https://www.turnkeylinux.org/files/tmp/debian-12-turnkey-fileserver_18.0rc2-1_amd64.tar.gz),
+   3. Download the [fileserver LXC](https://www.turnkeylinux.org/files/tmp/debian-12-turnkey-fileserver_18.0rc2-1_amd64.tar.gz),
       but be aware this link is a Release Candidate at this time courtesy of [JedMeister](https://github.com/JedMeister).
-   3. The file downloaded should be moved to /tank/vz/template/cache for use by PVE.
-   4. Create the LXC for `filesystem` with the default settings except use 2 cores.
-   5. Use the following command to link the created zfs filesystem to the fileserver from the PVE command line[^1]:
-      `pct set 101 -mp0 /tank/filesystem,mp=/tank`
+   4. The file downloaded should be moved to /tank/vz/template/cache for use by PVE.
+   5. Create the LXC for `filesystem` with the default settings except use 2 cores. In the following instructions, it is presumed
+      this is created as "CT 101." If you used a different number, be mindful to change the value accordingly.
+   6. Create the following zfs datasets on PVE.
+      * `zfs create -p tank/fileserver/tub` for host specific use, including host "internal" backups. Becomes `/tank` on the client.
+	  * `chmod 777 /tank/fileserver/tub` for the initial setup of permissions. This will be corrected later.
+      * `zfs create -p tank/fileserver/home` as a `home` folder for client users on the network.
+	  * `chmod 777 /tank/fileserver/home`
+      * `zfs create -p tank/fileserver/share` for files to be shared amount the network users and/ or host clients.
+	  * `chmod 777 /tank/fileserver/share`
+	  * `#zfs create -p rpool/fileserver/share` is *not* created as this time, but may be useful if "fast" sharing is required. The
+	    amount of space for this purpose would be significantly smaller, and is considered an edge use case at this time.
+   5. Use the following commands to link the created zfs filesystem to the fileserver from the PVE command line[^1]:
+      ```
+	  pct set 101 -mp0 /tank/fileserver/tub,mp=/tank
+	  pct set 101 -mp0 /tank/fileserver/home,mp=/home
+	  pct set 101 -mp0 /tank/fileserver/share,mp=/share
+	  ```
    6. Start the server and have a password ready for the "root samba account." This password is *not* the same as the host
       root account!
    7. Enter your email, of course, and note the IP of various services before you close the window. Be sure to add
