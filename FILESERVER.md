@@ -8,16 +8,32 @@ Outline of build for the FILESERVER host
    2. Don't do *anything* or make changes if not *explicitly* required by the overall goal.
 
 ## Todo
-   1. I am amiss in not doing a snapshot of the fileserver host before configuring and verifying the rollback
-      process.
+   1. I am amiss in not doing a snapshot of the fileserver host before configuring and verifying the rollback process.
    2. I need to set up automated snapshots vs. recovery as part of this build.
 
 ## Install Actions
-   1. This [howto](https://www.itsembedded.com/sysadmin/proxmox_bind_unprivileged_lxc/) covers the benefits and
-      liabilities of using a "privilaged" container for the fileserver. For our particular use-case, the
-      [Organization.md](../main/ORGANIZATION.md) document provides the "short list" of clients and hosts we
-      will be serving, and so we can prepare this ahead of time to provide "unprivilaged" access while
-      maintaining 
+   1. This [howto](https://www.itsembedded.com/sysadmin/proxmox_bind_unprivileged_lxc/) covers the benefits and liabilities of using
+      a "privilaged" container for the fileserver. For our particular use-case, the [Organization.md](../main/ORGANIZATION.md)
+	  document provides the "short list" of clients and hosts we will be serving, and so we can prepare this ahead of time to provide "unprivilaged" access.
+   2. From [Organization.md](../main/ORGANIZATION.md) we have the following "users" with groupIDs to create:
+      * root
+	  * asmith:asmith, users
+	  * mikaela:mikaela, users
+	  * gameserver, gameserver
+	  * whimpercraft, gameserver
+	  * palworld, gameserver
+	  * valheim, gameserver
+	  * asa, gameserver
+   3. To avoid confusion and name collision, the above list on the container will be allocated on the PVE Host with a
+      "fs-" in front and 100000 added to the ID#'s used on the LXC host. We also need to have zfs datasets with the
+	  correct privilages as [documented.](https://docs.oracle.com/cd/E23823_01/html/819-5461/gbace.html) The default
+	  command, `adduser` creates the ID numbers in the "privilaged" range we can't use. Fortunately, we can add
+	  overrides as required. The following will add our first "filesystem user" account:
+	  * 
+	  
+   
+   
+   
    1. I am working from "How to setup Turnkey Linux Fileserver on Proxmox VE":
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=UnXxJMjW4LE"
 target="_blank"><img src="http://img.youtube.com/vi/UnXxJMjW4LE/0.jpg" 
@@ -53,7 +69,8 @@ alt="How to setup Turnkey Linux Fileserver on Proxmox VE" width="240" height="18
        network. "Convert Users" to have them added.
    15. `Servers/Samba Windows File Sharing`, `Create File Share`, then select a share name of "Home Directories Share",
        `/tank/home` is the directory to share, "create with permissions: 750", "Create with group: users", 
-       
+
+Quicknote: Map /tank/filesystem/host, /tank/home to /home, /tank/slowshare, and make one for "fastshare"
       
       
    
