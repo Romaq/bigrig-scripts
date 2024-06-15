@@ -52,6 +52,28 @@ Outline of build for the FILESERVER host
    7. Enter your email, of course, and note the IP of various services before you close the window. Be sure to add
       `fileserver` as a new host in the `dns` local domain list.
    8. Use your browser to connect to the [GUI](http://fileserver:12321).
+   9. We will now prepare the offered Samba shares. Go to the [Samba configuration](https://fileserver:12321/samba/?xnavigation=1)
+   10. Select `cdrom` and `Delete Selected Shares`.
+   11. The "homes" sharing will actually be split between "tub" for host only and "home" for user only when added as functional
+       "users" and attached as SMB clients. The "share" the only folder specific for managed sharing between multiple hosts and
+	   users depending upon need and policy. So the "homes" share we will leave as is.
+   12. Select `storage` and the configuration page will appear.
+   13. Rename `storage` to `share`, and change the "Directory to share" to `/share`, then `Save`.
+   14. Add System users and groups through https://fileserver:12321/useradmin/?xnavigation=1. For example, let's create the username
+       "bob" by selecting the `Create a new user` button.
+   15. Enter "bob" for the username and give it a password which will match the SMB password in later steps. For the "Home
+       directory," allow it to use "Automatic" which will default to `/home`.
+   16. For the "Primary Group," select "New group with same name as user" and add "users" as the Seconary Group. Be sure to select
+       the "right arrow" button to move this to the "In groups" panel.
+   17. The defaults should be fine, but the ideal policy is, "don't add or change anything you do not *have* to." Permissions should
+       be planned such that "users" group projects, "client" machine projects and such can be protected at this level.
+   18. Add a new "host client" much the same way. For this example, we will have a machine named "ASA". Follow step #14, but we will
+       use a specific "home" for each client. This is to separate "user" data from "machine data that likely needs scheduled
+	   backup." So for the "Home directory" use `/tank`. This folder is the "home" for the `/tank` shared with other machines.[^2]
+	   
+	   
+	   
+   
    9. In the web GUI, select `Networking/NFS Exports`, `Select all` and delete the existing exports unless you are comfortable
       setting up NFS securely. For the purpose of this network, we will be using SMB4 clients all the way for consistant
       behavior and security policy.
@@ -68,7 +90,6 @@ Outline of build for the FILESERVER host
    15. `Servers/Samba Windows File Sharing`, `Create File Share`, then select a share name of "Home Directories Share",
        `/tank/home` is the directory to share, "create with permissions: 750", "Create with group: users", 
 
-Quicknote: Map /tank/filesystem/host, /tank/home to /home, /tank/slowshare, and make one for "fastshare"
       
       
    
@@ -78,4 +99,10 @@ Quicknote: Map /tank/filesystem/host, /tank/home to /home, /tank/slowshare, and 
       
 ## Footnotes:
    [^1]: Using the PVE GUI interface creates a more complicated directory structure. Using CLI is direct and keeps
-   the directory structure on PVE simplified.
+   the directory structure on PVE more simplified.
+   [^2]:  When we schedule backups from the fileserver, we will do backups out of its `/tank` which will encompass the `/tank`
+       folder mounted on the other machines. As we plan on backups to be handled by the fileserver, we are going to ignore the
+	   UID/GUID and mapping on the PVE host as identity and permissions are maintained *there*. But this will show on the PVE host
+	   as `/tank/fileserver/tub/asa` with raw UID/GUIDs of 100000+. Those *can* be mapped to identities, but that would be extra
+	   work for minimal benefit in this application. For an "enterprise class" build, you would likely use OpenLDAP, but you would
+	   also be paying someone for their time and expertise. You *do* get what you pay for.
