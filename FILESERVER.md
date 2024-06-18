@@ -69,7 +69,16 @@ Outline of build for the FILESERVER host
        be planned such that "users" group projects, "client" machine projects and such can be protected at this level.
    18. Add a new "host client" much the same way. For this example, we will have a machine named "ASA". Follow step #14, but we will
        use a specific "home" for each client. This is to separate "user" data from "machine data that likely needs scheduled
-	   backup." So for the "Home directory" use `/tank`. This folder is the "home" for the `/tank` shared with other machines.[^2]
+	   backup." So for the "Home directory" use `/tank/asa`. This folder is the "home" for the `/tank` shared with other
+	   machines.[^2]
+   19. While this particular host has no other logical groups at this time, you may wish to add such logical groups as needed. In
+       this case, it is "gameuser" making the backups and handling the data. On another, it could be "www-data" if it is your web
+	   server, and so on. It is the job of the fileserver host and the SMB client to correctly map the UID of the client to the UID
+	   of the host.[^3]
+   22. 
+   **** Surprise... two year old documentation isn't doing what it is supposed to do. Regroup on an updated SMB Client document****
+   
+   
 	   
 	   
 	   
@@ -99,10 +108,12 @@ Outline of build for the FILESERVER host
       
 ## Footnotes:
    [^1]: Using the PVE GUI interface creates a more complicated directory structure. Using CLI is direct and keeps
-   the directory structure on PVE more simplified.
-   [^2]:  When we schedule backups from the fileserver, we will do backups out of its `/tank` which will encompass the `/tank`
+       the directory structure on PVE more simplified.
+   [^2]: When we schedule backups from the fileserver, we will do backups out of its `/tank` which will encompass the `/tank`
        folder mounted on the other machines. As we plan on backups to be handled by the fileserver, we are going to ignore the
 	   UID/GUID and mapping on the PVE host as identity and permissions are maintained *there*. But this will show on the PVE host
 	   as `/tank/fileserver/tub/asa` with raw UID/GUIDs of 100000+. Those *can* be mapped to identities, but that would be extra
 	   work for minimal benefit in this application. For an "enterprise class" build, you would likely use OpenLDAP, but you would
 	   also be paying someone for their time and expertise. You *do* get what you pay for.
+   [^3]: You may also need to use "set sticky guid" and set other Linux file-system permissions. If you are reading this, you should
+       know what you are doing. There are a number of valuable places to [start](https://linuxhandbook.com/linux-file-permissions/).
