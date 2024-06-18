@@ -75,8 +75,14 @@ Outline of build for the FILESERVER host
        this case, it is "gameuser" making the backups and handling the data. On another, it could be "www-data" if it is your web
 	   server, and so on. It is the job of the fileserver host and the SMB client to correctly map the UID of the client to the UID
 	   of the host.[^3]
-   22. 
-   **** Surprise... two year old documentation isn't doing what it is supposed to do. Regroup on an updated SMB Client document****
+	   
+	   *** Howto doesn't mention "how to" mount the SMB, it just does everything else interactively... SO ***
+	   
+   22. Working from another [howto](https://linuxtect.com/linux-smbclient-command-tutorial/), I need to `apt install smbclient`.
+   23. `smbclient -L fileserver.local` will ask for your `WORKGROUP\root` password. Go ahead and use your "root@fileserver'
+       password to see the list.[^4]
+   24. `smbclient -L \\fileserver\asa` will be used to confirm it works for the "asa" user, and we will mount that on the ASA client
+       `/tank` for off-host saving our game backups.
    
    
 	   
@@ -117,3 +123,5 @@ Outline of build for the FILESERVER host
 	   also be paying someone for their time and expertise. You *do* get what you pay for.
    [^3]: You may also need to use "set sticky guid" and set other Linux file-system permissions. If you are reading this, you should
        know what you are doing. There are a number of valuable places to [start](https://linuxhandbook.com/linux-file-permissions/).
+   [^4]: I have "fileserver" as a cname for "fileserver.local", but smbclient won't look up by cname. I beg the indulgance of
+       forgiveness as I learn by doing.
