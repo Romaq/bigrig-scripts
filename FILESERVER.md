@@ -77,6 +77,7 @@ Outline of build for the FILESERVER host
 	   of the host.[^3]
 	   
 	   *** Howto doesn't mention "how to" mount the SMB, it just does everything else interactively... SO ***
+	   Consider if "asa" on the fileserver and "root @ asa" has something to do with it.
 	   
    22. Working from another [howto](https://linuxtect.com/linux-smbclient-command-tutorial/), I need to `apt install smbclient`.
    23. `smbclient -L fileserver.local` will ask for your `WORKGROUP\root` password. Go ahead and use your "root@fileserver'
