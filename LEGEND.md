@@ -2,9 +2,9 @@
 
 These notes have "shorthand" for navigation menus. To avoid confusion, consider the following graphic:
 
-![thumbnail](../main/PVE-Legend-thumb.png "Thumbnail of PVE Window")
+![thumbnail](../main/images/PVE-Legend-thumb.png "Thumbnail of PVE Window")
 ---
-[Click here to embiggen!](../main/PVE-Legend.png "PVE Screen")
+[Click here to embiggen!](../main/images/PVE-Legend.png "PVE Screen")
 
 When the purpose is to navigate to the "Options" button on the example screen, you need to select the
 "Datacenter", then "PVE", lastly "100 (dns)" of the left panel. This is more easily abbreviated as
