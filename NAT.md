@@ -13,5 +13,8 @@
       Linux Bridge" ...
    3. Unfortunately, the "admin" manual is big on presuming underestanding and short on instructions. 
    [Setup NAT on Proxmox](https://bobcares.com/blog/setup-nat-on-proxmox/) may provide useful information.
+   4. The part where I failed is that I attempted to link to enp2s0. I should have linked to vmbr0. The instructions also provide more clues,
+      but not really instructions on how to arrange it. As a for-instance, I have a command to do port-forwarding, but there is no instruction
+      on where and how to put that such that it is a natural part of the boot process, happening automatically.
 ## Footnotes:
    [^1]: ...
