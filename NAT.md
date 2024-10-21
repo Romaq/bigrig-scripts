@@ -21,5 +21,7 @@
       gets IPv6 as well as IPv4 from its DHCP.
    6. Still not adequate. I have the device set up, but my VPN VM is doing DHCP for something that will never answer. SDN offers DHCP, but as
       I recall, it doesn't handle the port-forwarding. [I'll have to find that quote and put it back here as a note.](https://forum.proxmox.com/threads/is-it-possible-to-do-port-forwarding-when-using-sdn.154445/) "Port forwarding needs to be done manually." Still kinda nutz.
+   7. https://thelinuxforum.com/articles/924-how-to-create-a-private-nat-network-interface-on-proxmox-ve-8 may actually explain it *if* I can
+      still do port-forwarding.
 ## Footnotes:
    [^1]: ...
