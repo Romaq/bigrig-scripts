@@ -16,5 +16,10 @@
    4. The part where I failed is that I attempted to link to enp2s0. I should have linked to vmbr0. The instructions also provide more clues,
       but not really instructions on how to arrange it. As a for-instance, I have a command to do port-forwarding, but there is no instruction
       on where and how to put that such that it is a natural part of the boot process, happening automatically.
+   5. ComputingForGeeks.com may actually have a better [Guide](https://computingforgeeks.com/create-private-network-bridge-proxmox-with-nat/)
+      for what I'm attempting to do. I have a functional network, additional VMs pull DHCP out of the EERO machine I'm using, and each machine
+      gets IPv6 as well as IPv4 from its DHCP.
+   6. Still not adequate. I have the device set up, but my VPN VM is doing DHCP for something that will never answer. SDN offers DHCP, but as
+      I recall, it doesn't handle the port-forwarding. [I'll have to find that quote and put it back here as a note.](https://forum.proxmox.com/threads/is-it-possible-to-do-port-forwarding-when-using-sdn.154445/) "Port forwarding needs to be done manually." Still kinda nutz.
 ## Footnotes:
    [^1]: ...
