@@ -21,7 +21,7 @@ Outline of build for a generic host
       each based on a "server name", and possibly even having wildly different mods and configurations. For
       this instruction, I will build "whimpercraft", but the same technical details will apply except where
       noted.
-   2. It would be good to make sure you hae the "gameserver" template available. To do this, select
+   2. It would be good to make sure you have the "gameserver" template available. To do this, select
       `Dataserver/pve/tank (pve):CT Templates`. There is a "Templates" button that will list many available
       options. [Turnkey Linux](https://www.turnkeylinux.org) has a website full of details, discussion, and
       notice of updates. Search, select, and download from the window.
