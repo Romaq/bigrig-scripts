@@ -25,7 +25,7 @@
       after I changed it which complicated setting up this host in practice.
 
 ## Install Actions
-   1. There is a [howto](https://www.datahoards.com/installing-pi-hole-inside-a-proxmox-lxc-container/) on installing
+   1. There is a [howto](https://www.naturalborncoder.com/2023/07/installing-pi-hole-on-proxmox/) on installing
       Pi-Hole into a Proxmox container. Reference notes follow.
    2. [TKL Core](https://www.turnkeylinux.org/core) is used consistent with other TKL templates.
    3. A name of "DNS" dictates what the machine is and does primarily.
@@ -37,7 +37,7 @@
    9. The "Postfix Configuration" window will come up, presuming no postfix configuation files are present. Select
       "Local only", then use your FQDN as the domain name.
    14. This [howto] explains how to set up
-       [Pi-hole](https://www.datahoards.com/installing-pi-hole-inside-a-proxmox-lxc-container/).
+       [Pi-hole](https://www.naturalborncoder.com/2023/07/installing-pi-hole-on-proxmox/).
    15. Pi.hole does an excellent job configuring itself but after the install and configuring your DHCP to provide dns
        as the primary DNS host, it is wise to reboot all of the machines to be using DNS for that purpose.
    
