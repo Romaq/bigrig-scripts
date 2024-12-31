@@ -63,7 +63,7 @@ Outline of build for the PVE host
    11. `zfs create -p tank/vz` will create a dataset with the defaults and no quota, but options can be set on the dataset
        later. Note: Those options (such as compression changes) may not take effect except on new files added.
    12. On `Datacenter:Storage` use the `Add` button and select `Directory`. Give it an ID of "tank" and the directory is
-       `tank/vz`. The `Shared:` box should be off, as there are no additional nodes in this setup. Select the `Content:`
+       `/tank/vz`. The `Shared:` box should be off, as there are no additional nodes in this setup. Select the `Content:`
        button and add `VZDump backup file`, `Container template`, and `ISO image`. This is where "whole-machine" backups,
        LXC Container templates, and bootable ISO images will go.
    13. We want to turn *OFF* those options from "local", select it and use "Edit" and deactivate those selections in
